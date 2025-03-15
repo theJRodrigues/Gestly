@@ -40,8 +40,11 @@ const customerSchema = new Schema<ICustomer>({
     complement: { type: String, required: false },
     refPoint: { type: String, required: false },
   },
+},
+{
+  timestamps: true
 });
 
-const Cliente = mongoose.model("Cliente", customerSchema);
+const Customer = mongoose.model("Cliente", customerSchema);
 
-export default Cliente;
+export default Customer;

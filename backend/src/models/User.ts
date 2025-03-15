@@ -18,9 +18,10 @@ const userSchema = new Schema<IUser>({
     password: {type: String, required: true, minlength:8, maxlength: 30 , match: senhaRegex},
 },
 {
-    timestamps: true
+    timestamps: true,
+    collection: "Users"
 })
 
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model<IUser>("User", userSchema)
 
 export default User

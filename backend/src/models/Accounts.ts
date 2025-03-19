@@ -1,36 +1,37 @@
 import mongoose, { Schema } from "mongoose";
 
-interface IUser {
-  name: string;
-  surname: string;
+export interface IAccounts {
+  firsname: string;
+  lastname: string;
   email: string;
   password: string;
 }
 
 const emailRegex =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-const senhaRegex =
+
+const passRegex =
   /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*\d)(?=.*[@$!%*?&])[A-Za-zÀ-ÖØ-öø-ÿ\d@$!%*?&]{8,30}$/u;
 
-const userSchema = new Schema<IUser>(
+const accountsSchema = new Schema<IAccounts>(
   {
-    name: { type: String, required: true, minlength: 1 },
-    surname: { type: String, required: true, minlength: 1 },
-    email: { type: String, required: true, match: emailRegex },
+    firsname: { type: String, required: true, minlength: 1 },
+    lastname: { type: String, required: true, minlength: 1 },
+    email: { type: String, required: true, match: emailRegex, unique: true },
     password: {
       type: String,
       required: true,
       minlength: 8,
       maxlength: 30,
-      match: senhaRegex,
+      match: passRegex,
     },
   },
   {
     timestamps: true,
-    collection: "Users",
+    collection: "Accounts",
   }
 );
 
-const UserModel = mongoose.model<IUser>("User", userSchema);
+const Accounts = mongoose.model<IAccounts>("Accounts", accountsSchema);
 
-export default UserModel;
+export default Accounts;

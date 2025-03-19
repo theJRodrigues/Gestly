@@ -42,7 +42,8 @@ const customerSchema = new Schema<ICustomer>({
   },
 },
 {
-  timestamps: true
+  timestamps: true,
+  collection: "Costumers"
 });
 
 const Customer = mongoose.model("Cliente", customerSchema);

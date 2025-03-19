@@ -1,27 +1,14 @@
 import express, { Request, Response } from "express";
-import UserModel from "../models/User";
-import { register } from "../controllers/UserController";
+import { GetAccountsRepository } from "../repositories/accounts-repositories/get-accounts-mongo/get-accounts-mongo";
+import { GetAccountsController } from "../controllers/accounts-controllers/get-accounts/get-accounts-controller";
 
-const userRoutes = express.Router();
+const accountsRoutes = express.Router();
 
-userRoutes.post("/register", register)
+accountsRoutes.get("/", async (req: Request, res: Response) => {
+  const getAccountsRepository = new GetAccountsRepository();
+  const getAccountsController = new GetAccountsController(getAccountsRepository)
 
-// userRoutes.get("/users", async (req: Request, res: Response) => {
-//   const users = await UserModel.find();
-//   res.status(200).json(users);
-// });
-
-// userRoutes.delete("/users", async (req: Request, res: Response) => {
-//   const userId = req.body.id;
-//   await UserModel.findByIdAndDelete(userId);
-//   const users = await UserModel.find();
-//   res.status(200).json(users);
-// });
-
-// userRoutes.post("/users", async (req: Request, res: Response) => {
-//   const user = req.body;
-//   const newUser = await UserModel.create(user);
-//   res.json(newUser);
-// });
-
-export default userRoutes;
+  const {statusCode, body} = await getAccountsController.getAccounts()
+  res.status(statusCode).json(body)
+});
+export default accountsRoutes;

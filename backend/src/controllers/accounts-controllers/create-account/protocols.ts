@@ -1,10 +1,11 @@
 import { IAccount } from "../../../models/Account";
 import { IHTTPResponse } from "../../protocols";
 
+export type TCreateAccountParams = Omit<IAccount, "id">
 export interface ICreateAccountController {
-  handleCreateAccount(): Promise<IHTTPResponse<IAccount>>;
+  handleCreateAccount(params:TCreateAccountParams): Promise<IHTTPResponse<IAccount>>;
 }
 
 export interface ICreateAccountRepository {
-  createAccount(): Promise<IAccount>;
+  createAccount(params: TCreateAccountParams): Promise<IAccount>;
 }

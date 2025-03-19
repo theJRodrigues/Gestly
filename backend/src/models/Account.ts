@@ -1,7 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IAccount {
-  firsname: string;
+  id: string
+  firstname: string;
   lastname: string;
   email: string;
   password: string;
@@ -15,7 +16,7 @@ const passRegex =
 
 const accountsSchema = new Schema<IAccount>(
   {
-    firsname: { type: String, required: true, minlength: 1 },
+    firstname: { type: String, required: true, minlength: 1 },
     lastname: { type: String, required: true, minlength: 1 },
     email: { type: String, required: true, match: emailRegex, unique: true },
     password: {
@@ -29,7 +30,14 @@ const accountsSchema = new Schema<IAccount>(
   {
     timestamps: true,
     collection: "Accounts",
+    toJSON: {
+      transform: (_doc, ret) => {
+          ret.id = ret._id; 
+          delete ret._id; 
+          delete ret.__v; 
+      },
   }
+}
 );
 
 const Account = mongoose.model<IAccount>("Accounts", accountsSchema);

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export interface IAccounts {
+export interface IAccount {
   firsname: string;
   lastname: string;
   email: string;
@@ -13,7 +13,7 @@ const emailRegex =
 const passRegex =
   /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*\d)(?=.*[@$!%*?&])[A-Za-zÀ-ÖØ-öø-ÿ\d@$!%*?&]{8,30}$/u;
 
-const accountsSchema = new Schema<IAccounts>(
+const accountsSchema = new Schema<IAccount>(
   {
     firsname: { type: String, required: true, minlength: 1 },
     lastname: { type: String, required: true, minlength: 1 },
@@ -32,6 +32,6 @@ const accountsSchema = new Schema<IAccounts>(
   }
 );
 
-const Accounts = mongoose.model<IAccounts>("Accounts", accountsSchema);
+const Account = mongoose.model<IAccount>("Accounts", accountsSchema);
 
-export default Accounts;
+export default Account;

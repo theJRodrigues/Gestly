@@ -1,10 +1,10 @@
 import { IAccount } from "../../../models/Account";
 import { IHTTPResponse } from "../../protocols";
 
-export interface IPostAccountController {
+export interface ICreateAccountController {
   handleCreateAccount(): Promise<IHTTPResponse<IAccount>>;
 }
 
-export interface IPostAccountRepository {
+export interface ICreateAccountRepository {
   createAccount(): Promise<IAccount>;
 }

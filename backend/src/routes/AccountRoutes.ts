@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { GetAccountsRepository } from "../repositories/accounts-repositories/get-accounts-mongo/get-accounts-mongo";
-import { GetAccountsController } from "../controllers/accounts-controllers/get-accounts/get-accounts-controller";
+import { GetAccountsController } from "../controllers/accounts-controllers/get-accounts/GetAccountsController";
 import { CreateAccountRepository } from "../repositories/accounts-repositories/create-account-mongo/create-account-mongo";
-import { CreateAccountController } from "../controllers/accounts-controllers/create-account/create-account-controller";
+import { CreateAccountController } from "../controllers/accounts-controllers/create-account/CreateAccountController";
 
 const accountsRoutes = express.Router();
 

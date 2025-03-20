@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
 import { IAccount } from "../../../models/Account";
-import { IHTTPRequest, IHTTPResponse } from "../../protocols";
+import { IHTTPResponse } from "../../protocols";
 import {
   ICreateAccountController,
   ICreateAccountRepository,

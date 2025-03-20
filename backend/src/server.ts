@@ -11,7 +11,6 @@ conectMongo();
 const port = process.env.PORT || 3000;
 
 const app = express();
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(cors({ credentials: true, origin: "htpp://localhost:5147" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

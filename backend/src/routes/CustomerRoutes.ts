@@ -1,6 +1,6 @@
 import express from "express";
-import { GetAllCustomersController ,CreateCustomerController } from "../controllers";
-import { CreateCustomerRepository, GetAllCustomersRepository } from "../repositories";
+import { GetAllCustomersController ,CreateCustomerController, GetCustomerByIdController } from "../controllers";
+import { CreateCustomerRepository, GetAllCustomersRepository, GetCustomerByIdRepository } from "../repositories";
 const customerRoutes = express.Router();
 
 customerRoutes.get("/", async (req, res) => {
@@ -9,6 +9,16 @@ customerRoutes.get("/", async (req, res) => {
 
   const {statusCode, body} = await getAllCustomersController.handleGetAllCustomers();
   res.status(statusCode).json(body)
+});
+
+customerRoutes.get("/:id", (req, res) => {
+  const getCustomerByIdRepository = 
+  new GetCustomerByIdRepository()
+
+  const getCustomerByIdController = 
+  new GetCustomerByIdController(getCustomerByIdRepository);
+  
+  getCustomerByIdController.handleGetCustomerById(req, res);
 });
 
 customerRoutes.post("/create", async (req, res) => {

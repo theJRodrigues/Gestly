@@ -1,9 +1,6 @@
-import express, { Request, Response } from "express";
-import Customer from "../models/Customer";
-import { CreateCustomerRepository } from "../repositories/customers-repositories/create-customer-mongo/CreateCustomerRepository";
-import { CreateCustomerController } from "../controllers/customers-controllers/create-customer/CreateCustomerController";
-import { GetAllCustomersRepository } from "../repositories/customers-repositories/get-customer-mongo/GetAllCustomersRepository";
-import { GetAllCustomersController } from "../controllers/customers-controllers/get-customer/GetAllCustomersController";
+import express from "express";
+import { GetAllCustomersController ,CreateCustomerController } from "../controllers";
+import { CreateCustomerRepository, GetAllCustomersRepository } from "../repositories";
 const customerRoutes = express.Router();
 
 customerRoutes.get("/", async (req, res) => {

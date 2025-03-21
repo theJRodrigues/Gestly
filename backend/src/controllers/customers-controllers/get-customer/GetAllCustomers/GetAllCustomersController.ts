@@ -1,5 +1,5 @@
-import { ICustomer } from "../../../models/Customer";
-import { IHTTPResponse, statusCode } from "../../protocols";
+import { ICustomer } from "../../../../models/Customer";
+import { IHTTPResponse, statusCode } from "../../../protocols";
 import { IGetAllCustomersController, IGetAllCustomersRepository } from "./protocols";
 
 export class GetAllCustomersController implements IGetAllCustomersController{

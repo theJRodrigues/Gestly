@@ -1,5 +1,5 @@
 import { IAccount } from "../../../models/Account";
-import { IHTTPResponse } from "../../protocols";
+import { IHTTPResponse, statusCode } from "../../protocols";
 import { IGetAccountsController, IGetAccountsRepository } from "./protocols";
 
 export class GetAccountsController implements IGetAccountsController {
@@ -8,9 +8,9 @@ export class GetAccountsController implements IGetAccountsController {
   async getAccounts(): Promise<IHTTPResponse<IAccount[]>> {
     try {
       const accounts = await this.getAccountsRepository.getAccountsMongo();
-      return { statusCode: 200, body: accounts };
+      return { statusCode: statusCode.OK, body: accounts };
     } catch (error) {
-      return { statusCode: 500, body: "Something went wrong" };
+      return { statusCode: statusCode.BadRequest, body: "Something went wrong" };
     }
   }
 }

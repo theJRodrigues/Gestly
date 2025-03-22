@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
 import Routes from "./routes/Router";
-import { config } from "dotenv";
-import conectMongo from "./database/mongo/db";
+import { GetEnvVariables } from "./Services/GetEnvVaribles";
+import { ConectMongoDB } from "./database/mongo/ConectMongoDB";
 
-config();
-const port = process.env.PORT || 3000;
+const {serverPort} = GetEnvVariables.variables();
 const app = express();
 
 app.use(cors({ credentials: true, origin: "htpp://localhost:5147" }));
@@ -13,12 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(Routes);
 
-conectMongo()
-  .then(() => {
-    app.listen(port, () => {
-      console.log("teste");
-    });
-  })
-  .catch((error) => {
-    console.error("Erro ao tentar conectar no banco de dados " + error);
-  });
+ConectMongoDB.connect().then(() => {
+    app.listen(serverPort, () => {
+      console.log("Sucesso ao conectar no servidor na porta "+serverPort);
+    })})

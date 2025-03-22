@@ -3,7 +3,7 @@ import { GetAllCustomersController ,CreateCustomerController, GetCustomerByIdCon
 import { CreateCustomerRepository, GetAllCustomersRepository, GetCustomerByIdRepository } from "../repositories";
 const customerRoutes = express.Router();
 
-customerRoutes.get("/", async (req, res) => {
+customerRoutes.get("/", async (_req, res) => {
   const getAllCustomersRepository = new GetAllCustomersRepository()
   const getAllCustomersController = new GetAllCustomersController(getAllCustomersRepository);
 

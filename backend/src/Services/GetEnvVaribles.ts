@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 interface IEnvVariables{
     dbUser: string,
     dbPassword: string, 
-    serverPort: number
+    serverPort: number,
+    jwtSecret: string,
 }
 
 export class GetEnvVariables{
@@ -13,12 +14,13 @@ export class GetEnvVariables{
         const serverPort = Number(process.env.PORT) || 3000;
         const dbUser = process.env.DB_USER;
         const dbPassword = process.env.DB_PASSWORD;
+        const jwtSecret = process.env.JWT_SECRET
 
-        if(!serverPort || !dbUser || !dbPassword){
-            throw new Error("Please, verify environment variables")
+        if(!serverPort || !dbUser || !dbPassword || !jwtSecret){
+            throw new Error("Verificar as variáveis de ambiente")
         }
         
-        return {serverPort, dbUser, dbPassword}
+        return {serverPort, dbUser, dbPassword, jwtSecret}
     }
 
 }

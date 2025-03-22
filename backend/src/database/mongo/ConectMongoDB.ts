@@ -9,10 +9,10 @@ export class ConectMongoDB {
         `mongodb+srv://${dbUser}:${dbPassword}@gestly.qozhz.mongodb.net/Gestly?retryWrites=true&w=majority&appName=Gestly`
       );
       //Retirar no deploy
-      console.log("Sucesso na conexão com banco de dados")
+      console.log("Conexão com o banco de dados feita com sucesso")
       return
     } catch (error) {
-      throw new Error("Error connecting to database: " + error)
+      throw new Error("Erro ao conectar com o banco de dados" + error)
     }
   }
 }

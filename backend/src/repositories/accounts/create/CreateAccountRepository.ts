@@ -1,12 +1,12 @@
 import {
   ICreateAccountRepository,
-  TCreateAccountParams,
+  AccountWithoutId,
 } from "../../../controllers/accounts/create/protocols";
 import Account, { IAccount } from "../../../models/Account";
 
 export class CreateAccountRepository implements ICreateAccountRepository {
-  async createAccount(params: TCreateAccountParams): Promise<IAccount> {
-    const createAccount = await Account.create(params);
+  async create(account: AccountWithoutId): Promise<IAccount> {
+    const createAccount = await Account.create(account);
     return createAccount;
   }
 }

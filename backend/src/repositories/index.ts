@@ -1,3 +1,3 @@
-export * from './customers-repositories/create-customer-mongo/CreateCustomerRepository'
-export * from './customers-repositories/get-customer-mongo/GetAllCustomersRepository'
-export * from './customers-repositories/get-customer-mongo/GetCustomerByIdRepository'
+export * from './customers/create/CreateCustomerRepository'
+export * from './customers/get/GetCustomersRepository'
+export * from './customers/get/GetCustomerByIdRepository'

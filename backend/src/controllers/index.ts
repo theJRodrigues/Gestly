@@ -1,3 +1,3 @@
-export * from "./customers-controllers/create-customer/CreateCustomerController";
-export * from "./customers-controllers/get-customers/get-all-customers/GetAllCustomersController";
-export * from "./customers-controllers/get-customers/get-customer-by-id/GetCustomerByIdController";
+export * from "./customers/create/CreateCustomerController";
+export * from "./customers/get/get-all/GetCustomersController";
+export * from "./customers/get/get-by-id/GetCustomerByIdController";

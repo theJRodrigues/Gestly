@@ -1,4 +1,5 @@
 import dotenv from "dotenv"
+dotenv.config()
 
 interface IEnvVariables{
     dbUser: string,
@@ -9,8 +10,6 @@ interface IEnvVariables{
 
 export class GetEnvVariables{
     static  variables(): IEnvVariables{
-        dotenv.config()
-
         const serverPort = Number(process.env.PORT) || 3000;
         const dbUser = process.env.DB_USER;
         const dbPassword = process.env.DB_PASSWORD;

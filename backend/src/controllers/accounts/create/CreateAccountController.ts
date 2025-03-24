@@ -1,33 +1,28 @@
+import { Response } from "express";
 import { IAccount } from "../../../models/Account";
-import { IHTTPResponse, statusCode } from "../../protocols";
-import {
-  ICreateAccountController,
-  ICreateAccountRepository,
-  TCreateAccountParams,
-} from "./protocols";
+import { statusCode } from "../../protocols";
+import {  AccountWithoutId,} from "./protocols";
+import { CreateAccountRepository } from "../../../repositories/accounts/create/CreateAccountRepository";
 
-export class CreateAccountController implements ICreateAccountController {
-  constructor(
-    private readonly CreateAccountRepository: ICreateAccountRepository
-  ) {}
-
-  async handleCreateAccount(account: TCreateAccountParams): Promise<IHTTPResponse<IAccount>> {
+export class CreateAccountController{
+   async create(res: Response, account: AccountWithoutId): Promise<Response<IAccount>> {
 
     if(Object.keys(account).length < 4)
-        return  {statusCode: statusCode.BadRequest, body: "Todas as informações são obrigatórias"}  
+        return res.status(statusCode.BadRequest).send("Todas as informações são obrigatórias")
 
     for (const [key, value] of Object.entries(account)) {
         if (value === null || value === undefined || value === '') {
-          return { statusCode: statusCode.BadRequest, body: `O campo de ${key} não pode ser vazio` };
+          return res.status(statusCode.BadRequest).send(`O campo de ${key} não pode ser vazio`)
         }
       }
 
 
     try {
-      const createAccount = await this.CreateAccountRepository.createAccount(account);
-      return { statusCode: statusCode.Created, body: createAccount };
+      const CreateAccount = new CreateAccountRepository();
+      const createdAccount = await CreateAccount.create(account)
+      return res.status(statusCode.Created).json(createdAccount) 
     } catch (error) {
-      return {statusCode: statusCode.InternalServerError, body:"Something went wrong" + error};
+      return res.status(statusCode.InternalServerError).send("Something went wrong" + error)
     }
   }
 }

@@ -1,8 +1,3 @@
-export interface IHTTPResponse<T>{
-    statusCode: number,
-    body: T | string
-}
-
 export enum statusCode {
     OK = 200,
     Created = 201,

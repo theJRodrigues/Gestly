@@ -1,11 +1,11 @@
+import { Response } from "express";
 import { IAccount } from "../../../models/Account";
-import { IHTTPResponse } from "../../protocols";
 
-export type TCreateAccountParams = Omit<IAccount, "id">
+export type AccountWithoutId = Omit<IAccount, "id">
 export interface ICreateAccountController {
-  handleCreateAccount(params:TCreateAccountParams): Promise<IHTTPResponse<IAccount>>;
+   create(req: Request, res: Response, account: AccountWithoutId): Promise<Response<IAccount>>;
 }
 
 export interface ICreateAccountRepository {
-  createAccount(params: TCreateAccountParams): Promise<IAccount>;
+  create(account: AccountWithoutId): Promise<IAccount>;
 }

@@ -7,16 +7,6 @@ import { CreateAccountRepository } from "../../../repositories/accounts/create/C
 export class CreateAccountController{
    async create(res: Response, account: AccountWithoutId): Promise<Response<IAccount>> {
 
-    if(Object.keys(account).length < 4)
-        return res.status(statusCode.BadRequest).send("Todas as informações são obrigatórias")
-
-    for (const [key, value] of Object.entries(account)) {
-        if (value === null || value === undefined || value === '') {
-          return res.status(statusCode.BadRequest).send(`O campo de ${key} não pode ser vazio`)
-        }
-      }
-
-
     try {
       const CreateAccount = new CreateAccountRepository();
       const createdAccount = await CreateAccount.create(account)

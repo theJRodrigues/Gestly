@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  GetCustomersController,
-  CreateCustomerController,
+  // GetCustomersController,
+  // CreateCustomerController,
   GetCustomerByIdController,
 } from "../controllers";
 import {
@@ -11,16 +11,16 @@ import {
 } from "../repositories";
 const customerRoutes = express.Router();
 
-customerRoutes.get("/", async (_req, res) => {
-  const getAllCustomersRepository = new GetCustomersRepository();
-  const getAllCustomersController = new GetCustomersController(
-    getAllCustomersRepository
-  );
+// customerRoutes.get("/", async (_req, res) => {
+//   const getAllCustomersRepository = new GetCustomersRepository();
+//   const getAllCustomersController = new GetCustomersController(
+//     getAllCustomersRepository
+//   );
 
-  const { statusCode, body } =
-    await getAllCustomersController.handleGetAllCustomers();
-  res.status(statusCode).json(body);
-});
+//   const { statusCode, body } =
+//     await getAllCustomersController.handleGetAllCustomers();
+//   res.status(statusCode).json(body);
+// });
 
 customerRoutes.get("/:id", (req, res) => {
   const getCustomerByIdRepository = new GetCustomerByIdRepository();
@@ -32,15 +32,15 @@ customerRoutes.get("/:id", (req, res) => {
   getCustomerByIdController.handleGetCustomerById(req, res);
 });
 
-customerRoutes.post("/create", async (req, res) => {
-  const createCustomerRepository = new CreateCustomerRepository();
-  const createCustomerController = new CreateCustomerController(
-    createCustomerRepository
-  );
+// customerRoutes.post("/create", async (req, res) => {
+//   const createCustomerRepository = new CreateCustomerRepository();
+//   const createCustomerController = new CreateCustomerController(
+//     createCustomerRepository
+//   );
 
-  const { statusCode, body } =
-    await createCustomerController.handleCreateCustomer(req.body);
-  res.status(statusCode).json(body);
-});
+//   const { statusCode, body } =
+//     await createCustomerController.handleCreateCustomer(req.body);
+//   res.status(statusCode).json(body);
+// });
 
 export default customerRoutes;

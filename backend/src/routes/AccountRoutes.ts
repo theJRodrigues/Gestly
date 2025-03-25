@@ -1,10 +1,17 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { CreateAccountController } from "../controllers/accounts/create/CreateAccountController";
+import CreateAccountValidate from "../middlewares/ValidateAccountInfos";
+import { isValidy } from "../middlewares/isValid";
 
 const accountsRoutes = express.Router();
 
-accountsRoutes.post("/register",(req, res) => {
-  const createAccount = new CreateAccountController()
-  createAccount.create(res, req.body)
-});
+accountsRoutes.post(
+  "/register",
+  CreateAccountValidate.validate(),
+  isValidy.validate,
+  (req: Request, res: Response) => {
+    const createAccount = new CreateAccountController();
+    createAccount.create(res, req.body);
+  }
+);
 export default accountsRoutes;

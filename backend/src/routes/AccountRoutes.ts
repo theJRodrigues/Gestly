@@ -7,8 +7,8 @@ const accountsRoutes = express.Router();
 
 accountsRoutes.post(
   "/register",
-  CreateAccountValidate.validate(),
-  isValidy.validate,
+  CreateAccountValidate.validateFields(),
+  isValidy.validationErrors,
   (req: Request, res: Response) => {
     const createAccount = new CreateAccountController();
     createAccount.create(res, req.body);

@@ -30,8 +30,22 @@ class CreateAccountValidate {
     .isEmail().withMessage("O email fornecido não é um email válido")
   }
 
+  private static validePassword(): ValidationChain{
+    return body("password")
+    .exists().withMessage("A senha é obrigatório")
+    .bail()
+    .trim().notEmpty().withMessage("A senha não pode ser vazia")
+    .bail()
+    .isStrongPassword({
+      minLength: 8,
+      minUppercase:1,
+      minNumbers:1,
+      minSymbols: 1,
+
+    }).withMessage("A senha não é forte o suficiente")
+  }
   static validateFields(): ValidationChain[] {
-    return [this.validateFirstname(), this.validateLastname(), this.validateEmail()];
+    return [this.validateFirstname(), this.validateLastname(), this.validateEmail(), this.validePassword()];
   }
 }
 

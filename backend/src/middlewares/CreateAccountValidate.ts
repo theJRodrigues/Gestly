@@ -30,7 +30,7 @@ class CreateAccountValidate {
     .isEmail().withMessage("O email fornecido não é um email válido")
   }
 
-  private static validePassword(): ValidationChain{
+  private static validatePassword(): ValidationChain{
     return body("password")
     .exists().withMessage("A senha é obrigatório")
     .bail()
@@ -45,7 +45,7 @@ class CreateAccountValidate {
     }).withMessage("A senha não é forte o suficiente")
   }
   static validateFields(): ValidationChain[] {
-    return [this.validateFirstname(), this.validateLastname(), this.validateEmail(), this.validePassword()];
+    return [this.validateFirstname(), this.validateLastname(), this.validateEmail(), this.validatePassword()];
   }
 }
 

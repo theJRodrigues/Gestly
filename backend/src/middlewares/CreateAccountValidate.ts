@@ -6,8 +6,7 @@ class CreateAccountValidate {
       .exists()
       .withMessage("O primeiro nome é obrigatório")
       .bail()
-      .trim()
-      .notEmpty()
+      .notEmpty({ignore_whitespace: true})
       .withMessage("O primeiro nome não pode ser vazio");
   }
 
@@ -16,8 +15,7 @@ class CreateAccountValidate {
       .exists()
       .withMessage("O último nome é obrigatório")
       .bail()
-      .trim()
-      .notEmpty()
+      .notEmpty({ignore_whitespace: true})
       .withMessage("O último nome não pode ser vazio");
   }
 
@@ -25,24 +23,19 @@ class CreateAccountValidate {
     return body("email")
     .exists(). withMessage("O email é obrigatório")
     .bail()
-    .trim().notEmpty().withMessage("O email não pode ser vazio")
-    .bail()
     .isEmail().withMessage("O email fornecido não é um email válido")
   }
 
   private static validatePassword(): ValidationChain{
     return body("password")
-    .exists().withMessage("A senha é obrigatório")
-    .bail()
-    .trim().notEmpty().withMessage("A senha não pode ser vazia")
+    .exists().withMessage("A senha é obrigatória")
     .bail()
     .isStrongPassword({
       minLength: 8,
-      minUppercase:1,
-      minNumbers:1,
+      minUppercase: 1,
+      minNumbers: 1,
       minSymbols: 1,
-
-    }).withMessage("A senha não é forte o suficiente")
+    }).withMessage("A senha deve conter pelo menos 8 caracteres, incluindo 1 letra maiúscula, 1 número e 1 símbolo")
   }
   static validateFields(): ValidationChain[] {
     return [this.validateFirstname(), this.validateLastname(), this.validateEmail(), this.validatePassword()];

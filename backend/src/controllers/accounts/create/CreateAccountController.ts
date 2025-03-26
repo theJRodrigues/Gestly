@@ -1,18 +1,21 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { IAccount } from "../../../models/Account";
 import { statusCode } from "../../protocols";
-import {  AccountWithoutId,} from "./protocols";
-import { CreateAccountRepository } from "../../../repositories/accounts/create/CreateAccountRepository";
+import {  AccountWithoutId, ICreateAccountController, ICreateAccountRepository,} from "./protocols";
 
-export class CreateAccountController{
-   async create(res: Response, account: AccountWithoutId): Promise<Response<IAccount>> {
+export class CreateAccountController 
+implements ICreateAccountController{
+  constructor(private readonly createAccountRepository
+    :ICreateAccountRepository){}
 
+  async createAccount(req: Request, res: Response): Promise<Response<IAccount>> {
     try {
-      const CreateAccount = new CreateAccountRepository();
-      const createdAccount = await CreateAccount.create(account)
-      return res.status(statusCode.Created).json(createdAccount) 
+      const account:AccountWithoutId  =  req.body
+      const newAccount = await this.createAccountRepository.createAccount(account)
+      
+      return res.status(statusCode.Created).json(newAccount) 
     } catch (error) {
-      return res.status(statusCode.InternalServerError).send("Something went wrong" + error)
-    }
+      return res.status(statusCode.InternalServerError).json({errorDB: "Ocorreu um erro ao tentar criar a conta no banco de dados" + error})    
   }
+}
 }

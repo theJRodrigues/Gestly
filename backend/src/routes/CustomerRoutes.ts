@@ -1,12 +1,10 @@
 import express from "express";
 import {
-  // GetCustomersController,
-  // CreateCustomerController,
+  CreateCustomerController,
   GetCustomerByIdController,
 } from "../controllers";
 import {
   CreateCustomerRepository,
-  GetCustomersRepository,
   GetCustomerByIdRepository,
 } from "../repositories";
 const customerRoutes = express.Router();
@@ -23,24 +21,23 @@ const customerRoutes = express.Router();
 // });
 
 customerRoutes.get("/:id", (req, res) => {
-  const getCustomerByIdRepository = new GetCustomerByIdRepository();
+  const getCustomerByIdRepository = 
+  new GetCustomerByIdRepository();
 
-  const getCustomerByIdController = new GetCustomerByIdController(
-    getCustomerByIdRepository
-  );
+  const getCustomerByIdController = 
+  new GetCustomerByIdController(getCustomerByIdRepository);
 
   getCustomerByIdController.handleGetCustomerById(req, res);
 });
 
-// customerRoutes.post("/create", async (req, res) => {
-//   const createCustomerRepository = new CreateCustomerRepository();
-//   const createCustomerController = new CreateCustomerController(
-//     createCustomerRepository
-//   );
+customerRoutes.post("/create", async (req, res) => {
+  const createCustomerRepository = 
+  new CreateCustomerRepository()
 
-//   const { statusCode, body } =
-//     await createCustomerController.handleCreateCustomer(req.body);
-//   res.status(statusCode).json(body);
-// });
+  const createCustomerController = 
+  new CreateCustomerController(createCustomerRepository);
+  
+  createCustomerController.createCustomer(req, res)
+ });
 
 export default customerRoutes;

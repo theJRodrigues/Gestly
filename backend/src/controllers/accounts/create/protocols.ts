@@ -7,5 +7,7 @@ export interface ICreateAccountController {
 }
 
 export interface ICreateAccountRepository {
+  validateExistingAccountWithEmail(account: AccountWithoutId): Promise<boolean>
+  
   createAccount(account: AccountWithoutId): Promise<IAccount>;
 }

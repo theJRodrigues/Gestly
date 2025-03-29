@@ -1,12 +1,11 @@
 import { body, ValidationChain } from "express-validator";
 
-class ValidationCreateAccount {
+export class ValidateCreateAccount {
   private static validateFirstname(): ValidationChain {
     return body("firstname")
       .exists()
-      .withMessage("O primeiro nome é obrigatório").bail()
-      .isString()
-      .withMessage("O nome não pode ser um número").bail()
+      .withMessage("O primeiro nome é obrigatório")
+      .bail()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O primeiro nome não pode ser vazio");
   }
@@ -14,9 +13,8 @@ class ValidationCreateAccount {
   private static validateLastname(): ValidationChain {
     return body("lastname")
       .exists()
-      .withMessage("O sobrenome é obrigatório").bail()
-      .isString()
-      .withMessage("O sobrenome não deve ser um número").bail()
+      .withMessage("O sobrenome é obrigatório")
+      .bail()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O sobrenome não pode ser vazio");
   }
@@ -24,7 +22,8 @@ class ValidationCreateAccount {
   private static validateEmail(): ValidationChain {
     return body("email")
       .exists()
-      .withMessage("O email é obrigatório").bail()
+      .withMessage("O email é obrigatório")
+      .bail()
       .isEmail()
       .withMessage("O email fornecido não é um email válido");
   }
@@ -32,7 +31,8 @@ class ValidationCreateAccount {
   private static validatePassword(): ValidationChain {
     return body("password")
       .exists()
-      .withMessage("A senha é obrigatória").bail()
+      .withMessage("A senha é obrigatória")
+      .bail()
       .isStrongPassword({
         minLength: 8,
         minUppercase: 1,
@@ -53,4 +53,3 @@ class ValidationCreateAccount {
   }
 }
 
-export default ValidationCreateAccount;

@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express";
 import { CreateAccountController } from "../controllers/accounts/create/CreateAccountController";
-import ValidationCreateAccount from "../middlewares/validations-account/create/ValidationCreateAccount";
-import { isValidy } from "../middlewares/isValid";
 import { CreateAccountRepository } from "../repositories";
+import { isValidy, ValidateCreateAccount } from "../middlewares";
+
 
 const accountsRoutes = express.Router();
 
 accountsRoutes.post(
   "/register",
-  ValidationCreateAccount.validateFields(),
+  ValidateCreateAccount.validateFields(),
   isValidy.validationErrors,
   (req: Request, res: Response) => {
     const createAccountRepository = new CreateAccountRepository();

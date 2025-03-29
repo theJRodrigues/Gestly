@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import {CreateCustomerController,GetCustomerByIdController} from "../controllers";
 import {CreateCustomerRepository,GetCustomerByIdRepository} from "../repositories";
-import { ValidateCreateCustomer } from "../middlewares/validations-customer/create/ValidateCreateCustomer";
-import { isValidy } from "../middlewares/isValid";
+import { ValidateCreateCustomer, isValidy} from "../middlewares";
+
 const customerRoutes = express.Router();
 
 // customerRoutes.get("/", async (_req, res) => {
@@ -26,13 +26,16 @@ customerRoutes.get("/:id", (req, res) => {
   getCustomerByIdController.handleGetCustomerById(req, res);
 });
 
-customerRoutes.post("/create",
+customerRoutes.post(
+  "/create",
   ValidateCreateCustomer.validateFields(),
   isValidy.validationErrors,
   (req: Request, res: Response) => {
     const createCustomerRepository = new CreateCustomerRepository();
 
-    const createCustomerController = new CreateCustomerController(createCustomerRepository);
+    const createCustomerController = new CreateCustomerController(
+      createCustomerRepository
+    );
 
     createCustomerController.createCustomer(req, res);
   }

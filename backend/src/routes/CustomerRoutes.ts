@@ -1,20 +1,17 @@
-import express, { Request, Response } from "express";
-import {CreateCustomerController,GetCustomerByIdController} from "@controllers/index";
-import {CreateCustomerRepository,GetCustomerByIdRepository} from "../repositories";
-import { ValidateCreateCustomer, isValidy} from "../middlewares";
+import express, {Request, Response } from "express";
+import {CreateCustomerController, GetCustomerByIdController} from "@controllers";
+import {CreateCustomerRepository,GetAllCustomersRepository,GetCustomerByIdRepository} from "@repositories";
+import { ValidateCreateCustomer, isValidy} from "@middlewares";
+import { GetAllCustomersController } from "@controllers";
 
 const customerRoutes = express.Router();
 
-// customerRoutes.get("/", async (_req, res) => {
-//   const getAllCustomersRepository = new GetCustomersRepository();
-//   const getAllCustomersController = new GetCustomersController(
-//     getAllCustomersRepository
-//   );
+customerRoutes.get("/", async (_req, res) => {
+  const repository = new GetAllCustomersRepository();
+  const controller = new GetAllCustomersController(repository);
 
-//   const { statusCode, body } =
-//     await getAllCustomersController.handleGetAllCustomers();
-//   res.status(statusCode).json(body);
-// });
+  controller.getAll(res);
+});
 
 customerRoutes.get("/:id", (req, res) => {
   const getCustomerByIdRepository = new GetCustomerByIdRepository();
@@ -26,18 +23,13 @@ customerRoutes.get("/:id", (req, res) => {
   getCustomerByIdController.handleGetCustomerById(req, res);
 });
 
-customerRoutes.post(
-  "/create",
+customerRoutes.post("/create",
   ValidateCreateCustomer.validateFields(),
   isValidy.validationErrors,
   (req: Request, res: Response) => {
-    const createCustomerRepository = new CreateCustomerRepository();
-
-    const createCustomerController = new CreateCustomerController(
-      createCustomerRepository
-    );
-
-    createCustomerController.createCustomer(req, res);
+    const repository = new CreateCustomerRepository();
+    const controller = new CreateCustomerController(repository);
+    controller.createCustomer(req, res);
   }
 );
 

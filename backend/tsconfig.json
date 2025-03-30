@@ -13,11 +13,17 @@
     "baseUrl": "src",
     "paths":{
       "@controllers/*": ["controllers/*"],
+      "@controllers": ["controllers/index"],
       "@middlewares/*": ["middlewares/*"],
+      "@middlewares": ["middlewares/index"],
       "@repositories/*": ["repositories/*"],
+      "@repositories": ["repositories/index"],
       "@models/*": ["models/*"],
+      "@models": ["models/index"],
       "@routes/*": ["routes/*"],
-      "@services/*": ["services/*"]
+      "@routes": ["routes/index"],
+      "@services/*": ["services/*"],
+      "@services": ["services/index"]
     }
   }
 }

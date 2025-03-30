@@ -1,29 +1,32 @@
-import express, {Request, Response } from "express";
-import {CreateCustomerController, GetCustomerByIdController} from "@controllers";
-import {CreateCustomerRepository,GetAllCustomersRepository,GetCustomerByIdRepository} from "@repositories";
-import { ValidateCreateCustomer, isValidy} from "@middlewares";
-import { GetAllCustomersController } from "@controllers";
+import express, { Request, Response } from "express";
+import {
+  CreateCustomerController,
+  GetCustomerByIdController,
+  GetAllCustomersController
+} from "@controllers";
+import {
+  CreateCustomerRepository,
+  GetAllCustomersRepository,
+  GetCustomerByIdRepository,
+} from "@repositories";
+import { ValidateCreateCustomer, isValidy } from "@middlewares";
 
 const customerRoutes = express.Router();
 
-customerRoutes.get("/", async (_req, res) => {
+customerRoutes.get("/",(_req, res) => {
   const repository = new GetAllCustomersRepository();
   const controller = new GetAllCustomersController(repository);
-
   controller.getAll(res);
 });
 
 customerRoutes.get("/:id", (req, res) => {
-  const getCustomerByIdRepository = new GetCustomerByIdRepository();
-
-  const getCustomerByIdController = new GetCustomerByIdController(
-    getCustomerByIdRepository
-  );
-
-  getCustomerByIdController.handleGetCustomerById(req, res);
+  const repository = new GetCustomerByIdRepository();
+  const controller = new GetCustomerByIdController(repository);
+  controller.getById(req, res);
 });
 
-customerRoutes.post("/create",
+customerRoutes.post(
+  "/create",
   ValidateCreateCustomer.validateFields(),
   isValidy.validationErrors,
   (req: Request, res: Response) => {

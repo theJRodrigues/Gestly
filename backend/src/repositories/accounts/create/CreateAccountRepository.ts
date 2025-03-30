@@ -1,5 +1,5 @@
-import { AccountWithoutId, ICreateAccountRepository } from "../../../controllers";
-import Account, { IAccount } from "../../../models/Account";
+import { AccountWithoutId, ICreateAccountRepository } from "@controllers/index";
+import Account, { IAccount } from "@models/Account";
 
 
 

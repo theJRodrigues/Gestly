@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ICustomer } from "../../../models/Customer";
-import { statusCode } from "../../protocols";
+import { ICustomer } from "@models/Customer";
+import { statusCode } from "@controllers/protocols";
 import {
   ICreateCustomerController,
   ICreateCustomerRepository,

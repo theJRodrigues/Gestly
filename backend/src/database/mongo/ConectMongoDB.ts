@@ -1,5 +1,5 @@
+import { GetEnvVariables } from "@services/GetEnvVaribles";
 import mongoose from "mongoose";
-import { GetEnvVariables } from "../../Services/GetEnvVaribles";
 
 export class MongoDB {
   static async connect(): Promise<void> {

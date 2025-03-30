@@ -1,8 +1,8 @@
 import {
   ICreateCustomerRepository,
   CustomerWithoutId,
-} from "../../../controllers/customers/create/protocols";
-import Customer, { ICustomer } from "../../../models/Customer";
+} from "@controllers/customers/create/protocols";
+import Customer, { ICustomer } from "@models/Customer";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
   async validateExistingCustomerWithCPF(

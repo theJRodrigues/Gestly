@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IAccount } from "../../../models/Account";
-import { statusCode } from "../../protocols";
+import { IAccount } from "@models/Account";
+import { statusCode } from "@controllers/protocols";
 import {  AccountWithoutId, ICreateAccountController, ICreateAccountRepository,} from "./protocols";
 
 export class CreateAccountController 

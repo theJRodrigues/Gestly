@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { statusCode } from "../controllers/protocols";
+import { statusCode } from "@controllers/protocols";
 
 export class isValidy {
   static validationErrors(

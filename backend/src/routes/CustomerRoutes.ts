@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import {CreateCustomerController,GetCustomerByIdController} from "../controllers";
+import {CreateCustomerController,GetCustomerByIdController} from "@controllers/index";
 import {CreateCustomerRepository,GetCustomerByIdRepository} from "../repositories";
 import { ValidateCreateCustomer, isValidy} from "../middlewares";
 

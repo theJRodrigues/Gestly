@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ICustomer } from "../../../../models/Customer";
+import { ICustomer } from "@models/Customer";
 import { IGetCustomerByIdController, IGetCustomerByIdRepository } from "./protocols";
-import { statusCode } from "../../../protocols";
+import { statusCode } from "@controllers/protocols";
 import mongoose from "mongoose";
 
 export class GetCustomerByIdController implements IGetCustomerByIdController{

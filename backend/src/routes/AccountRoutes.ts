@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import { CreateAccountController } from "../controllers/accounts/create/CreateAccountController";
-import { CreateAccountRepository } from "../repositories";
-import { isValidy, ValidateCreateAccount } from "../middlewares";
+import { CreateAccountController } from "@controllers/index";
+import { CreateAccountRepository } from "@repositories/index";
+import { isValidy, ValidateCreateAccount } from "@middlewares/index";
 
 
 const accountsRoutes = express.Router();

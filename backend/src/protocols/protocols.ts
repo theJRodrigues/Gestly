@@ -13,7 +13,7 @@ export enum statusCode {
 
 export interface IHttpResponse<T> {
   statusCode: statusCode;
-  body: T;
+  body: T | IErrorResponse;
 }
 export interface IErrorResponse {
   error: string;

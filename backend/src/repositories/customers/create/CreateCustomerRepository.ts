@@ -1,25 +1,21 @@
 import {
   ICreateCustomerRepository,
-  CustomerWithoutId,
-} from "@controllers/customers/create/protocols";
+  CreateCustomerDTO,
+} from "@protocols";
 import Customer, { ICustomer } from "@models/Customer";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
-  async validateExistingCustomerWithCPF(
-    customer: CustomerWithoutId
-  ): Promise<boolean> {
-    const isCreatedByCPF = await Customer.findOne({ cpf: customer.cpf });
-    return !!isCreatedByCPF;
+  async existsByCPF(customer: CreateCustomerDTO): Promise<boolean> {
+    const isCreated = await Customer.findOne({ cpf: customer.cpf });
+    return !!isCreated;
   }
 
-  async validateExistingWithEmail(
-    customer: CustomerWithoutId
-  ): Promise<boolean> {
-    const isCreatedByEmail = await Customer.findOne({ email: customer.email });
-    return !!isCreatedByEmail;
+  async existsByEmail(customer: CreateCustomerDTO): Promise<boolean> {
+    const isCreated = await Customer.findOne({ email: customer.email });
+    return !!isCreated;
   }
 
-  async createCustomer(customer: CustomerWithoutId): Promise<ICustomer> {
+  async create(customer: CreateCustomerDTO): Promise<ICustomer> {
     const createCustomer = await Customer.create(customer);
     return createCustomer;
   }

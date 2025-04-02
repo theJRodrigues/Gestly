@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import { IAccount } from "../../../models/Account";
+import { IHttpResponse, IResponseError } from "@controllers";
+import { IAccount } from "@models";
 
-export type AccountWithoutId = Omit<IAccount, "id">
+export type CreateAccountDTO = Omit<IAccount, "id">;
 export interface ICreateAccountController {
-   createAccount(req: Request, res: Response): Promise<Response<IAccount>>;
+  create(account: CreateAccountDTO): Promise<IHttpResponse<IAccount | IResponseError>>;
 }
 
 export interface ICreateAccountRepository {
-  validateExistingAccountWithEmail(account: AccountWithoutId): Promise<boolean>
-  
-  createAccount(account: AccountWithoutId): Promise<IAccount>;
+  validateExistingAccountWithEmail(account: CreateAccountDTO): Promise<boolean>;
+
+  create(account: CreateAccountDTO): Promise<IAccount>;
 }

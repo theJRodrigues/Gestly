@@ -1,16 +1,15 @@
-import { AccountWithoutId, ICreateAccountRepository } from "@controllers/index";
+import { CreateAccountDTO, ICreateAccountRepository } from "@controllers/index";
 import Account, { IAccount } from "@models/Account";
 
-
-
 export class CreateAccountRepository implements ICreateAccountRepository {
-
-  async validateExistingAccountWithEmail(account: AccountWithoutId): Promise<boolean>{
-    const existingAccount= await Account.findOne({email: account.email})
-    return !!existingAccount
+  async validateExistingAccountWithEmail(
+    account: CreateAccountDTO
+  ): Promise<boolean> {
+    const existingAccount = await Account.findOne({ email: account.email });
+    return !!existingAccount;
   }
 
-  async createAccount(account: AccountWithoutId): Promise<IAccount> {
+  async create(account: CreateAccountDTO): Promise<IAccount> {
     const newAccount = await Account.create(account);
     return newAccount;
   }

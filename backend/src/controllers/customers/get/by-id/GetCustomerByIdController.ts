@@ -15,10 +15,6 @@ export class GetCustomerByIdController implements IGetCustomerByIdController {
   :Promise<Response<ICustomer>> {
     try {
       const { id: customerId } = req.params;
-
-      //add in middleware
-      
-
       const customer = await this.repository.getById(customerId);
 
       if (!customer){

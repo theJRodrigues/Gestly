@@ -10,3 +10,11 @@ export enum statusCode {
   InternalServerError = 500,
   ServiceUnavailable = 503,
 }
+
+export interface IHttpResponse<T> {
+  statusCode: statusCode;
+  body: T;
+}
+export interface IResponseError{
+  error: string;
+}

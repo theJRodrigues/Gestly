@@ -1,28 +1,39 @@
-import { Request, Response } from "express";
 import { IAccount } from "@models/Account";
-import { statusCode } from "@controllers/protocols";
-import {  AccountWithoutId, ICreateAccountController, ICreateAccountRepository,} from "./protocols";
+import { IHttpResponse, IResponseError, statusCode } from "@controllers/protocols";
+import {
+  CreateAccountDTO,
+  ICreateAccountController,
+  ICreateAccountRepository,
+} from "./protocols";
 
-export class CreateAccountController 
-implements ICreateAccountController{
-  constructor(private readonly createAccountRepository
-    :ICreateAccountRepository){}
+export class CreateAccountController implements ICreateAccountController {
+  constructor(
+    private readonly createAccountRepository: ICreateAccountRepository
+  ) {}
 
-  async createAccount(req: Request, res: Response): Promise<Response<IAccount>> {
+  async create(account: CreateAccountDTO): Promise<IHttpResponse<IAccount | IResponseError>> {
     try {
-      const account:AccountWithoutId  =  req.body
-      
-      const isExistAccountWithEmail = await this.createAccountRepository.validateExistingAccountWithEmail(account)
+      const isExistAccountWithEmail =
+        await this.createAccountRepository.validateExistingAccountWithEmail(
+          account
+        );
 
-      if(isExistAccountWithEmail){
-        return res.status(statusCode.Conflict).json({error: "Já existe uma conta criado com o email informado!"})
+      if (isExistAccountWithEmail) {
+        return {statusCode: statusCode.Conflict,
+          body:{ error: "Já existe uma conta criado com o email informado!" }};
       }
 
-      const newAccount = await this.createAccountRepository.createAccount(account)
-      
-      return res.status(statusCode.Created).json(newAccount) 
+      const newAccount = await this.createAccountRepository.create(account);
+
+      return {
+        statusCode: statusCode.Created,
+        body: newAccount,
+      };
     } catch (error) {
-      return res.status(statusCode.InternalServerError).json({errorDB: "Ocorreu um erro ao tentar criar a conta no banco de dados!" + error})    
+      return {statusCode: statusCode.InternalServerError, body: {
+        error:
+          "Ocorreu um erro ao tentar criar a conta no banco de dados!" + error,
+      }};
+    }
   }
-}
 }

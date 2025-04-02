@@ -1,4 +1,4 @@
-import { IGetCustomerByIdRepository } from "../../../controllers/customers/get/by-id/protocols";
+import { IGetCustomerByIdRepository } from "../../../protocols/customer/getById.protocol";
 import Customer, { ICustomer } from "../../../models/Customer";
 
 export class GetCustomerByIdRepository implements IGetCustomerByIdRepository {

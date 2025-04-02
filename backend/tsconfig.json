@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "baseUrl": "src",
-    "paths":{
+    "paths": {
       "@controllers/*": ["controllers/*"],
       "@controllers": ["controllers/index"],
       "@middlewares/*": ["middlewares/*"],
@@ -25,7 +25,8 @@
       "@services/*": ["services/*"],
       "@services": ["services/index"],
       "@adapters": ["adapters/index"],
-      "@factories": ["factories/index"]
+      "@factories": ["factories/index"],
+      "@protocols": ["protocols/index"]
     }
   }
 }

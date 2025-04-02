@@ -1,6 +1,5 @@
-import { IGetAllCustomersRepository } from "@controllers/customers/get/all/protocols";
+import { IGetAllCustomersRepository } from "protocols/customer/getAll.protocol";
 import Customer, { ICustomer } from "@models/Customer";
-
 
 export class GetAllCustomersRepository implements IGetAllCustomersRepository {
   async getAll(): Promise<ICustomer[]> {

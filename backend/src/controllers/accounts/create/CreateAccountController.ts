@@ -1,33 +1,25 @@
 import { IAccount } from "@models/Account";
-import {
-  IHttpResponse,
-  IErrorResponse,
-  statusCode,
-} from "@controllers/protocols";
+import { IHttpResponse, IErrorResponse, statusCode } from "@protocols";
 import {
   CreateAccountDTO,
   ICreateAccountController,
   ICreateAccountRepository,
-} from "./protocols";
+} from "@protocols";
 
 export class CreateAccountController implements ICreateAccountController {
   constructor(
     private readonly createAccountRepository: ICreateAccountRepository
   ) {}
 
-  async create(
-    account: CreateAccountDTO
-  ): Promise<IHttpResponse<IAccount | IErrorResponse>> {
+  async create(account: CreateAccountDTO): Promise<IHttpResponse<IAccount | IErrorResponse>> {
     try {
       const isExistAccountWithEmail =
-        await this.createAccountRepository.validateExistingAccountWithEmail(
-          account
-        );
+        await this.createAccountRepository.validateExistingWithEmail(account);
 
       if (isExistAccountWithEmail) {
         return {
           statusCode: statusCode.Conflict,
-          body: { error: "Já existe uma conta criado com o email informado!" },
+          body: { error: "Já existe uma conta criada com o email informado!" },
         };
       }
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ICustomer } from "../../../models/Customer";
+import { ICustomer } from "@models";
 export type CustomerWithoutId = Omit<ICustomer, "id">;
 
 export interface ICreateCustomerController {

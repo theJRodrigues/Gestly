@@ -2,9 +2,7 @@ import { CreateAccountDTO, ICreateAccountRepository } from "@controllers/index";
 import Account, { IAccount } from "@models/Account";
 
 export class CreateAccountRepository implements ICreateAccountRepository {
-  async validateExistingAccountWithEmail(
-    account: CreateAccountDTO
-  ): Promise<boolean> {
+  async validateExistingWithEmail(account: CreateAccountDTO): Promise<boolean> {
     const existingAccount = await Account.findOne({ email: account.email });
     return !!existingAccount;
   }

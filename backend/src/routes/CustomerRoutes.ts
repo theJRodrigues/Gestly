@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import {
   CreateCustomerController,
   GetCustomerByIdController,
-  GetAllCustomersController
+  GetAllCustomersController,
 } from "@controllers";
 import {
   CreateCustomerRepository,
@@ -13,7 +13,7 @@ import { ValidateCreateCustomer, isValidy } from "@middlewares";
 
 const customerRoutes = express.Router();
 
-customerRoutes.get("/",(_req, res) => {
+customerRoutes.get("/", (_req, res) => {
   const repository = new GetAllCustomersRepository();
   const controller = new GetAllCustomersController(repository);
   controller.getAll(res);
@@ -22,7 +22,7 @@ customerRoutes.get("/",(_req, res) => {
 customerRoutes.get("/:id", (req, res) => {
   const repository = new GetCustomerByIdRepository();
   const controller = new GetCustomerByIdController(repository);
-  controller.getById(req, res);
+  controller.get(req, res);
 });
 
 customerRoutes.post(

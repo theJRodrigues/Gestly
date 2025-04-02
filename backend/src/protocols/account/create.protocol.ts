@@ -9,7 +9,7 @@ export interface ICreateAccountController {
 }
 
 export interface ICreateAccountRepository {
-  validateExistingAccountWithEmail(account: CreateAccountDTO): Promise<boolean>;
+  validateExistingWithEmail(account: CreateAccountDTO): Promise<boolean>;
 
   create(account: CreateAccountDTO): Promise<IAccount>;
 }

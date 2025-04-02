@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ICustomer } from "@models/Customer";
-import { statusCode } from "@controllers/protocols";
+import { statusCode } from "protocols/protocols";
 import {
   ICreateCustomerController,
   ICreateCustomerRepository,
@@ -15,15 +15,18 @@ export class CreateCustomerController implements ICreateCustomerController {
   private async validateNotUniqueness(
     customer: CustomerWithoutId
   ): Promise<{ message: string } | undefined> {
-
-    const isCreatedByCPF = await this.createCustomerRepository.validateExistingCustomerWithCPF(customer);
+    const isCreatedByCPF =
+      await this.createCustomerRepository.validateExistingCustomerWithCPF(
+        customer
+      );
 
     if (isCreatedByCPF) {
       const message = "Já existe um cadastro com esse CPF.";
       return { message };
     }
 
-    const isCreatedByEmail = await this.createCustomerRepository.validateExistingWithEmail(customer);
+    const isCreatedByEmail =
+      await this.createCustomerRepository.validateExistingWithEmail(customer);
     if (isCreatedByEmail) {
       const message = "Já existe um cadastro com esse Email.";
       return { message };
@@ -37,7 +40,9 @@ export class CreateCustomerController implements ICreateCustomerController {
   ): Promise<Response<ICustomer | string>> {
     try {
       const customer: CustomerWithoutId = req.body;
-      const validationNotUniqueness = await this.validateNotUniqueness(customer);
+      const validationNotUniqueness = await this.validateNotUniqueness(
+        customer
+      );
 
       if (validationNotUniqueness) {
         return res
@@ -45,9 +50,10 @@ export class CreateCustomerController implements ICreateCustomerController {
           .json({ error: validationNotUniqueness.message });
       }
 
-      const newCustomer = await this.createCustomerRepository.createCustomer(customer);
+      const newCustomer = await this.createCustomerRepository.createCustomer(
+        customer
+      );
       return res.status(statusCode.Created).json(newCustomer);
-    
     } catch (error) {
       return res.status(statusCode.BadRequest).json({
         errorDB:

@@ -1,6 +1,8 @@
-import { IAccount } from "@models/Account";
-import { IHttpResponse, IErrorResponse, statusCode } from "@protocols";
+import { IAccount } from "@models";
 import {
+  IHttpResponse, 
+  IErrorResponse, 
+  statusCode,
   CreateAccountDTO,
   ICreateAccountController,
   ICreateAccountRepository,

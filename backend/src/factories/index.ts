@@ -1,1 +1,1 @@
-export * from './account/CreateAccountFactory';
+export * from './account/CreateAccount.factory';

@@ -1,4 +1,4 @@
-import { IHttpResponse, IErrorResponse } from "@controllers";
+import { IHttpResponse, IErrorResponse } from "@protocols";
 import { IAccount } from "@models";
 
 export type CreateAccountDTO = Omit<IAccount, "id">;

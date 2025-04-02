@@ -1,4 +1,4 @@
-import { CreateAccountDTO, ICreateAccountController} from "@controllers";
+import { CreateAccountDTO, ICreateAccountController} from "@protocols";
 import { IExpressAdapter } from "adapters/protocols";
 import { Request, Response } from "express";
 

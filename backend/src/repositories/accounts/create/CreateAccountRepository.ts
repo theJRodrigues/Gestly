@@ -1,4 +1,4 @@
-import { CreateAccountDTO, ICreateAccountRepository } from "@controllers/index";
+import { CreateAccountDTO, ICreateAccountRepository } from "@protocols";
 import Account, { IAccount } from "@models/Account";
 
 export class CreateAccountRepository implements ICreateAccountRepository {

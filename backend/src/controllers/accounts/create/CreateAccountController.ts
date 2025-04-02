@@ -1,5 +1,9 @@
 import { IAccount } from "@models/Account";
-import { IHttpResponse, IResponseError, statusCode } from "@controllers/protocols";
+import {
+  IHttpResponse,
+  IErrorResponse,
+  statusCode,
+} from "@controllers/protocols";
 import {
   CreateAccountDTO,
   ICreateAccountController,
@@ -11,7 +15,9 @@ export class CreateAccountController implements ICreateAccountController {
     private readonly createAccountRepository: ICreateAccountRepository
   ) {}
 
-  async create(account: CreateAccountDTO): Promise<IHttpResponse<IAccount | IResponseError>> {
+  async create(
+    account: CreateAccountDTO
+  ): Promise<IHttpResponse<IAccount | IErrorResponse>> {
     try {
       const isExistAccountWithEmail =
         await this.createAccountRepository.validateExistingAccountWithEmail(
@@ -19,8 +25,10 @@ export class CreateAccountController implements ICreateAccountController {
         );
 
       if (isExistAccountWithEmail) {
-        return {statusCode: statusCode.Conflict,
-          body:{ error: "Já existe uma conta criado com o email informado!" }};
+        return {
+          statusCode: statusCode.Conflict,
+          body: { error: "Já existe uma conta criado com o email informado!" },
+        };
       }
 
       const newAccount = await this.createAccountRepository.create(account);
@@ -30,10 +38,14 @@ export class CreateAccountController implements ICreateAccountController {
         body: newAccount,
       };
     } catch (error) {
-      return {statusCode: statusCode.InternalServerError, body: {
-        error:
-          "Ocorreu um erro ao tentar criar a conta no banco de dados!" + error,
-      }};
+      return {
+        statusCode: statusCode.InternalServerError,
+        body: {
+          error:
+            "Ocorreu um erro ao tentar criar a conta no banco de dados!" +
+            error,
+        },
+      };
     }
   }
 }

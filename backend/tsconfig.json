@@ -23,7 +23,9 @@
       "@routes/*": ["routes/*"],
       "@routes": ["routes/index"],
       "@services/*": ["services/*"],
-      "@services": ["services/index"]
+      "@services": ["services/index"],
+      "@adapters": ["adapters/index"],
+      "@factories": ["factories/index"]
     }
   }
 }

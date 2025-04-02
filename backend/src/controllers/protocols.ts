@@ -15,6 +15,6 @@ export interface IHttpResponse<T> {
   statusCode: statusCode;
   body: T;
 }
-export interface IResponseError{
+export interface IErrorResponse {
   error: string;
 }

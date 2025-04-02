@@ -1,10 +1,9 @@
 import express, { Request, Response } from "express";
-import { isValidy, ValidateCreateAccount } from "@middlewares/index";
-import { CreateAccountAdapter } from "adapters/express/account/CreateAccountAdapter";
-import { CreateAccountFactory } from "factories/account/CreateAccountFactory";
+import { isValidy, ValidateCreateAccount } from "@middlewares";
+import { CreateAccountAdapter } from "@adapters";
+import { CreateAccountFactory } from "@factories";
 
 const accountsRoutes = express.Router();
-
 
 accountsRoutes.post(
   "/register",

@@ -1,20 +1,16 @@
-import { Request, Response } from "express";
 import { ICustomer } from "@models";
-export type CustomerWithoutId = Omit<ICustomer, "id">;
+import { IErrorResponse, IHttpResponse } from "@protocols";
 
+export type CreateCustomerDTO = Omit<ICustomer, "id">;
 export interface ICreateCustomerController {
-  createCustomer(
-    req: Request,
-    res: Response
-  ): Promise<Response<ICustomer | string>>;
+  create(customer: CreateCustomerDTO)
+    :Promise<IHttpResponse<ICustomer | IErrorResponse>>;
 }
 
 export interface ICreateCustomerRepository {
-  validateExistingCustomerWithCPF(
-    customer: CustomerWithoutId
-  ): Promise<boolean>;
+  existsByCPF(customer: CreateCustomerDTO): Promise<boolean>;
 
-  validateExistingWithEmail(customer: CustomerWithoutId): Promise<boolean>;
+  existsByEmail(customer:CreateCustomerDTO): Promise<boolean>;
 
-  createCustomer(customer: CustomerWithoutId): Promise<ICustomer>;
+  create(customer: CreateCustomerDTO): Promise<ICustomer>;
 }

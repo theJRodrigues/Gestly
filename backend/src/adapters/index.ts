@@ -1,2 +1,2 @@
 export * from './protocols'
-export * from './express/account/CreateAccountAdapter';
+export * from '../domains/account/controllers/CreateAccount.controller';

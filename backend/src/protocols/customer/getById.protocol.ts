@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ICustomer } from "@models/Customer";
+import { ICustomer } from "@shared/models/Customer";
 
 export interface IGetCustomerByIdController {
   get(req: Request, res: Response): Promise<Response<ICustomer>>;

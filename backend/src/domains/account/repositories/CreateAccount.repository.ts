@@ -1,5 +1,5 @@
 import { CreateAccountDTO, ICreateAccountRepository } from "@protocols";
-import Account, { IAccount } from "@models/Account";
+import Account, { IAccount } from "@shared/models/Account";
 
 export class CreateAccountRepository implements ICreateAccountRepository {
   async validateExistingWithEmail(account: CreateAccountDTO): Promise<boolean> {

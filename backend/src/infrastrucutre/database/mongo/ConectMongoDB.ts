@@ -1,4 +1,4 @@
-import { GetEnvVariables } from "@services/GetEnvVaribles";
+import { GetEnvVariables } from "@shared/services/GetEnvVaribles";
 import mongoose from "mongoose";
 
 export class MongoDB {

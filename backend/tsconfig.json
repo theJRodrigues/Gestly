@@ -26,7 +26,12 @@
       "@services": ["services/index"],
       "@adapters": ["adapters/index"],
       "@factories": ["factories/index"],
-      "@protocols": ["protocols/index"]
+      "@protocols": ["protocols/index"],
+
+
+
+      "@shared/*": ["shared/*"],
+      "@domains/*": ["domains/*"]
     }
   }
 }

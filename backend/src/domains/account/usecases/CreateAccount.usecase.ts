@@ -1,19 +1,21 @@
-import { IAccount } from "@models";
+import { IAccount } from "@shared/models";
 import {
-  IHttpResponse, 
-  IErrorResponse, 
+  IHttpResponse,
+  IErrorResponse,
   statusCode,
   CreateAccountDTO,
-  ICreateAccountController,
+  ICreateAccountUseCase,
   ICreateAccountRepository,
 } from "@protocols";
 
-export class CreateAccountController implements ICreateAccountController {
+export class CreateAccountUseCase implements ICreateAccountUseCase {
   constructor(
     private readonly createAccountRepository: ICreateAccountRepository
   ) {}
 
-  async create(account: CreateAccountDTO): Promise<IHttpResponse<IAccount | IErrorResponse>> {
+  async create(
+    account: CreateAccountDTO
+  ): Promise<IHttpResponse<IAccount | IErrorResponse>> {
     try {
       const isExistAccountWithEmail =
         await this.createAccountRepository.validateExistingWithEmail(account);

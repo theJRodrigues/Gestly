@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { ValidateCreateCustomer, isValidy } from "@middlewares";
+import { ValidateCreateCustomer, isValidy } from "@shared/middlewares";
 import { CreateCustomerFactory } from "factories/customer/CreateCustomer.factory";
 import { CreateCustomerAdapter } from "adapters/express/customer/CreateCustomer.adapter";
 
@@ -17,7 +17,8 @@ const customerRoutes = express.Router();
 //   controller.get(req, res);
 // });
 
-customerRoutes.post( "/create",
+customerRoutes.post(
+  "/create",
   ValidateCreateCustomer.validateFields(),
   isValidy.validationErrors,
   (req: Request, res: Response) => {

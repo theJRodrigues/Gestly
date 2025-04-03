@@ -1,8 +1,5 @@
-import {
-  ICreateCustomerRepository,
-  CreateCustomerDTO,
-} from "@protocols";
-import Customer, { ICustomer } from "@models/Customer";
+import { ICreateCustomerRepository, CreateCustomerDTO } from "@protocols";
+import Customer, { ICustomer } from "@shared/models/Customer";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
   async existsByCPF(customer: CreateCustomerDTO): Promise<boolean> {

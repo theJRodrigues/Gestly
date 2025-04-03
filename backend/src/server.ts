@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import Routes from "./routes/Router";
-import { GetEnvVariables } from "@services/GetEnvVaribles";
-import { MongoDB } from "./database/mongo/ConectMongoDB";
+import { GetEnvVariables } from "@shared/services/GetEnvVaribles";
+import { MongoDB } from "./infrastrucutre/database/mongo/ConectMongoDB";
 
 const { serverPort } = GetEnvVariables.variables();
 const app = express();

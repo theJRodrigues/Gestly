@@ -87,11 +87,9 @@ export class ValidateCreateCustomer {
       .bail()
       .toDate()
       .custom((birthDate: Date) => {
-        const date = birthDate.toLocaleDateString("pt-BR", { timeZone: "UTC" });
-        const dateNow = new Date().toLocaleDateString("pt-BR", {
-          timeZone: "UTC",
-        });
-        if (date >= dateNow) {
+        const dateNow = new Date();
+        dateNow.setHours(-3, 0, 0, 0)
+        if (birthDate >= dateNow) {
           throw new Error(
             "A data de nascimento não pode ser maior ou igual a data atual."
           );

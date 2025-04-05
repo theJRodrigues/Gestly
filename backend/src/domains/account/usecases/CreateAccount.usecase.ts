@@ -1,41 +1,41 @@
 import { IAccount } from "@shared/models";
 import {
   IHttpResponse,
-  IErrorResponse,
-  statusCode,
+  IHttpErrorResponse,
+  HttpStatusCode,
+} from "@shared/protocols";
+
+import {
   CreateAccountDTO,
   ICreateAccountUseCase,
   ICreateAccountRepository,
-} from "@protocols";
+} from "@domains/account";
 
 export class CreateAccountUseCase implements ICreateAccountUseCase {
-  constructor(
-    private readonly createAccountRepository: ICreateAccountRepository
-  ) {}
+  constructor(private readonly repository: ICreateAccountRepository) {}
 
-  async create(
-    account: CreateAccountDTO
-  ): Promise<IHttpResponse<IAccount | IErrorResponse>> {
+  async create(account: CreateAccountDTO)
+  : Promise<IHttpResponse<IAccount | IHttpErrorResponse>> {
     try {
-      const isExistAccountWithEmail =
-        await this.createAccountRepository.validateExistingWithEmail(account);
+      const isExistAccountWithEmail = 
+      await this.repository.existsWithEmail(account);
 
       if (isExistAccountWithEmail) {
         return {
-          statusCode: statusCode.Conflict,
+          statusCode: HttpStatusCode.Conflict,
           body: { error: "Já existe uma conta criada com o email informado!" },
         };
       }
 
-      const newAccount = await this.createAccountRepository.create(account);
+      const newAccount = await this.repository.create(account);
 
       return {
-        statusCode: statusCode.Created,
+        statusCode: HttpStatusCode.Created,
         body: newAccount,
       };
     } catch (error) {
       return {
-        statusCode: statusCode.InternalServerError,
+        statusCode: HttpStatusCode.InternalServerError,
         body: {
           error:
             "Ocorreu um erro ao tentar criar a conta no banco de dados!" +

@@ -1,11 +1,13 @@
-import { ICreateAccountController } from "@protocols";
-import { CreateAccountController } from "@controllers";
-import { CreateAccountRepository } from "@repositories";
+import { 
+  ICreateAccountUseCase, 
+  CreateAccountUseCase, 
+  CreateAccountRepository 
+}from "@domains/account";
 
 export class CreateAccountFactory {
-  static make(): ICreateAccountController {
+  static make(): ICreateAccountUseCase {
     const repository = new CreateAccountRepository();
-    const controller = new CreateAccountController(repository);
-    return controller;
+    const useCase = new CreateAccountUseCase(repository);
+    return useCase;
   }
 }

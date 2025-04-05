@@ -1,4 +1,4 @@
-import { CreateAccountDTO, ICreateAccountUseCase } from "@protocols";
+import { CreateAccountDTO, ICreateAccountUseCase } from "@domains/account";
 import { IExpressController } from "@shared/protocols";
 import { Request, Response } from "express";
 
@@ -10,5 +10,6 @@ export class CreateAccountController implements IExpressController {
     const { statusCode, body } = await this.useCase.create(account);
 
     res.status(statusCode).json(body);
+    return
   }
 }

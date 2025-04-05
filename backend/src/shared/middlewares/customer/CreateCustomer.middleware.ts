@@ -1,6 +1,6 @@
 import { body, ValidationChain } from "express-validator";
 
-export class ValidateCreateCustomer {
+export class CreateCustomerMiddleware {
   private static validateFirstName(): ValidationChain {
     return body("firstname")
       .exists()
@@ -88,7 +88,7 @@ export class ValidateCreateCustomer {
       .toDate()
       .custom((birthDate: Date) => {
         const dateNow = new Date();
-        dateNow.setHours(-3, 0, 0, 0)
+        dateNow.setHours(-3, 0, 0, 0);
         if (birthDate >= dateNow) {
           throw new Error(
             "A data de nascimento não pode ser maior ou igual a data atual."

@@ -1,3 +1,3 @@
-export * from "./validations-account/ValidateCreateAccount";
-export * from "./validations-customer/ValidateCreateCustomer";
-export * from "./isValid"
+export * from "./account";
+export * from "./customer";
+export * from "./ValidateErrors.middleware"

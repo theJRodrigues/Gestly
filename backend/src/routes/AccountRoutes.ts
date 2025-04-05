@@ -1,5 +1,8 @@
 import express, { Request, Response } from "express";
-import { isValidy, ValidateCreateAccount } from "@shared/middlewares";
+import {
+  ValidateErrorsMiddlewares,
+  CreateAccountMiddleware,
+} from "@shared/middlewares";
 import { CreateAccountController } from "@adapters";
 import { CreateAccountFactory } from "@factories";
 
@@ -7,8 +10,8 @@ const accountsRoutes = express.Router();
 
 accountsRoutes.post(
   "/register",
-  ValidateCreateAccount.validateFields(),
-  isValidy.validationErrors,
+  CreateAccountMiddleware.validateFields(),
+  ValidateErrorsMiddlewares.handle,
   (req: Request, res: Response) => {
     const controller = CreateAccountFactory.make();
     const adapter = new CreateAccountController(controller);

@@ -1,5 +1,8 @@
 import express, { Request, Response } from "express";
-import { ValidateCreateCustomer, isValidy } from "@shared/middlewares";
+import {
+  CreateCustomerMiddleware,
+  ValidateErrorsMiddlewares,
+} from "@shared/middlewares";
 import { CreateCustomerFactory } from "factories/customer/CreateCustomer.factory";
 import { CreateCustomerAdapter } from "adapters/express/customer/CreateCustomer.adapter";
 
@@ -19,8 +22,8 @@ const customerRoutes = express.Router();
 
 customerRoutes.post(
   "/create",
-  ValidateCreateCustomer.validateFields(),
-  isValidy.validationErrors,
+  CreateCustomerMiddleware.validateFields(),
+  ValidateErrorsMiddlewares.handle,
   (req: Request, res: Response) => {
     const controller = CreateCustomerFactory.make();
     const adapter = new CreateCustomerAdapter(controller);

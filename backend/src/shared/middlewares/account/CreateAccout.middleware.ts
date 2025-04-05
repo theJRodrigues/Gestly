@@ -1,6 +1,6 @@
 import { body, ValidationChain } from "express-validator";
 
-export class ValidateCreateAccount {
+export class CreateAccountMiddleware {
   private static validateFirstname(): ValidationChain {
     return body("firstname")
       .exists()
@@ -52,4 +52,3 @@ export class ValidateCreateAccount {
     ];
   }
 }
-

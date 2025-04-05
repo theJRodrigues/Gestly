@@ -31,7 +31,8 @@
 
 
       "@shared/*": ["shared/*"],
-      "@domains/*": ["domains/*"]
+      "@domains/*": ["domains/*"],
+      "@infrastructure/*": ["infrastructure/*"]
     }
   }
 }

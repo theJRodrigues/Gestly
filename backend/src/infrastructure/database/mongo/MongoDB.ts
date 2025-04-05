@@ -12,7 +12,7 @@ export class MongoDB {
       console.log("Conexão com o banco de dados feita com sucesso");
       return;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao tentar se comunicar com o banco de dados. \n Entre em contato com o administrador.");
+      throw new Error("Ocorreu um erro ao tentar se comunicar com o banco de dados. Entre em contato com o administrador.");
     }
   }
 }

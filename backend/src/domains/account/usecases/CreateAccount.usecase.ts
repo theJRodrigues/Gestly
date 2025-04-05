@@ -1,8 +1,8 @@
-import { IAccount } from "@shared/models";
 import {
   IHttpResponse,
   IHttpErrorResponse,
   HttpStatusCode,
+  IHttpMessageResponse,
 } from "@shared/protocols";
 
 import {
@@ -12,34 +12,33 @@ import {
 } from "@domains/account";
 
 export class CreateAccountUseCase implements ICreateAccountUseCase {
+
   constructor(private readonly repository: ICreateAccountRepository) {}
 
   async create(account: CreateAccountDTO)
-  : Promise<IHttpResponse<IAccount | IHttpErrorResponse>> {
+  : Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
     try {
-      const isExistAccountWithEmail = 
+      const isExistWithEmail = 
       await this.repository.existsWithEmail(account);
 
-      if (isExistAccountWithEmail) {
+      if (isExistWithEmail) {
         return {
           statusCode: HttpStatusCode.Conflict,
           body: { error: "Já existe uma conta criada com o email informado!" },
         };
       }
 
-      const newAccount = await this.repository.create(account);
-
+      await this.repository.create(account);
       return {
         statusCode: HttpStatusCode.Created,
-        body: newAccount,
+        body: {message: "Conta criada com sucesso!"},
       };
     } catch (error) {
       return {
         statusCode: HttpStatusCode.InternalServerError,
         body: {
           error:
-            "Ocorreu um erro ao tentar criar a conta no banco de dados!" +
-            error,
+            "Ocorreu um erro ao tentar se comunicar com o banco de dados! Por favor, tente novamente mais tarde.",
         },
       };
     }

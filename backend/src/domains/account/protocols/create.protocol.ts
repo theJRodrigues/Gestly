@@ -1,14 +1,18 @@
-import { IHttpResponse, IHttpErrorResponse } from "@shared/protocols";
 import { IAccount } from "@shared/models";
+import { 
+  IHttpResponse, 
+  IHttpErrorResponse, 
+  IHttpMessageResponse 
+} from "@shared/protocols";
 
 export type CreateAccountDTO = Omit<IAccount, "id">;
 export interface ICreateAccountUseCase {
   create(account: CreateAccountDTO)
-  : Promise<IHttpResponse<IAccount | IHttpErrorResponse>>;
+  : Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>>;
 }
 
 export interface ICreateAccountRepository {
-  existsWithEmail(account: CreateAccountDTO): Promise<boolean>;
+  existsWithEmail(account: CreateAccountDTO): Promise<boolean >;
 
-  create(account: CreateAccountDTO): Promise<IAccount>;
+  create(account: CreateAccountDTO): Promise<IAccount >;
 }

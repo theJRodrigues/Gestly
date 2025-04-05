@@ -8,7 +8,6 @@ export class CreateAccountController implements IExpressController {
   async handle(req: Request, res: Response): Promise<void> {
     const account = req.body as CreateAccountDTO;
     const { statusCode, body } = await this.useCase.create(account);
-
     res.status(statusCode).json(body);
     return
   }

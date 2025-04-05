@@ -40,6 +40,4 @@ const accountsSchema = new Schema<IAccount>(
 }
 );
 
-const Account = mongoose.model<IAccount>("Accounts", accountsSchema);
-
-export default Account;
+export const Account = mongoose.model<IAccount>("Accounts", accountsSchema);

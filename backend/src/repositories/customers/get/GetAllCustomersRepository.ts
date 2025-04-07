@@ -1,5 +1,7 @@
 import { IGetAllCustomersRepository } from "protocols/customer/getAll.protocol";
-import Customer, { ICustomer } from "@shared/models/Customer";
+import Customer, {
+  ICustomer,
+} from "@infrastructure/database/MongoDB/models/Customer.model";
 
 export class GetAllCustomersRepository implements IGetAllCustomersRepository {
   async getAll(): Promise<ICustomer[]> {

@@ -1,5 +1,7 @@
 import { IGetCustomerByIdRepository } from "../../../protocols/customer/getById.protocol";
-import Customer, { ICustomer } from "../../../shared/models/Customer";
+import Customer, {
+  ICustomer,
+} from "../../../infrastructure/database/MongoDB/models/Customer.model";
 
 export class GetCustomerByIdRepository implements IGetCustomerByIdRepository {
   async getById(customerId: string): Promise<ICustomer | null> {

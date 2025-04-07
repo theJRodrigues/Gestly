@@ -6,7 +6,7 @@ import {
 } from "@shared/protocols";
 
 import {
-  CreateAccountDTO,
+  AccountDTO,
   ICreateAccountUseCase,
   ICreateAccountRepository,
 } from "@domains/account";
@@ -15,7 +15,7 @@ export class CreateAccountUseCase implements ICreateAccountUseCase {
 
   constructor(private readonly repository: ICreateAccountRepository) {}
 
-  async create(account: CreateAccountDTO)
+  async create(account: AccountDTO)
   : Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
     try {
       const isExistWithEmail = 

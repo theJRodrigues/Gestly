@@ -1,9 +1,9 @@
 import { 
   ICreateAccountUseCase, 
   CreateAccountUseCase, 
-  CreateAccountRepository 
 }from "@domains/account";
 
+import {CreateAccountRepository} from '@infrastructure/database/MongoDB'
 export class CreateAccountFactory {
   static make(): ICreateAccountUseCase {
     const repository = new CreateAccountRepository();

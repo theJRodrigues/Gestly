@@ -12,24 +12,8 @@
     "resolveJsonModule": true,
     "baseUrl": "src",
     "paths": {
-      "@controllers/*": ["controllers/*"],
-      "@controllers": ["controllers/index"],
-      "@middlewares/*": ["middlewares/*"],
-      "@middlewares": ["middlewares/index"],
-      "@repositories/*": ["repositories/*"],
-      "@repositories": ["repositories/index"],
-      "@models/*": ["models/*"],
-      "@models": ["models/index"],
       "@routes/*": ["routes/*"],
       "@routes": ["routes/index"],
-      "@services/*": ["services/*"],
-      "@services": ["services/index"],
-      "@adapters": ["adapters/index"],
-      "@factories": ["factories/index"],
-      "@protocols": ["protocols/index"],
-
-
-
       "@shared/*": ["shared/*"],
       "@domains/*": ["domains/*"],
       "@infrastructure/*": ["infrastructure/*"]

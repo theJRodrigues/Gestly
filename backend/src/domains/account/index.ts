@@ -1,5 +1,6 @@
 export * from './controllers'
 export * from './factories'
-export * from './protocols'
 export * from './repositories'
 export * from './usecases'
+export * from './dto'
+export * from './entities'

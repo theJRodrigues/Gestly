@@ -1,1 +1,1 @@
-export * from "./CreateAccount.repository";
+export * from "./createAccount.protocol";

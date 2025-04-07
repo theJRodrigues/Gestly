@@ -16,7 +16,8 @@
       "@routes": ["routes/index"],
       "@shared/*": ["shared/*"],
       "@domains/*": ["domains/*"],
-      "@infrastructure/*": ["infrastructure/*"]
+      "@infrastructure/*": ["infrastructure/*"],
+      "@adapters/*": ["adapters/*"]
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { ICustomer } from "@infrastructure/database/MongoDB/models/Customer.model";
+import { ICustomer } from "@infrastructure/MongoDB/models/Customer.model";
 
 export interface IGetAllCustomersController {
   getAll(res: Response): Promise<Response<ICustomer[]>>;

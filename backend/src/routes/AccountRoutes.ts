@@ -11,8 +11,9 @@ import {
 
 import {
   CreateAccountFactory, 
-  CreateAccountController
 } from '@domains/account'
+
+import {CreateAccountController} from "@adapters/controllers"
 
 const accountsRoutes = Router();
 

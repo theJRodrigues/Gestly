@@ -1,7 +1,7 @@
 import { ICreateCustomerRepository, CreateCustomerDTO } from "@protocols";
 import Customer, {
   ICustomer,
-} from "@infrastructure/database/MongoDB/models/Customer.model";
+} from "@infrastructure/MongoDB/models/Customer.model";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
   async existsByCPF(customer: CreateCustomerDTO): Promise<boolean> {

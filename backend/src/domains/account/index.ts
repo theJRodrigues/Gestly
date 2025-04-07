@@ -1,4 +1,3 @@
-export * from './controllers'
 export * from './factories'
 export * from './repositories'
 export * from './usecases'

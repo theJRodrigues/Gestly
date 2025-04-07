@@ -1,7 +1,7 @@
 import { AccountDTO } from "../dto";
 
 export interface ICreateAccountRepository {
-  existsWithEmail(account: AccountDTO): Promise<boolean >;
+  findWithEmail(email: string): Promise<AccountDTO | null>;
 
   create(account: AccountDTO): Promise<AccountDTO>;
 }

@@ -9,29 +9,32 @@ import {
   AccountDTO,
   ICreateAccountUseCase,
   ICreateAccountRepository,
+  Account,
 } from "@domains/account";
 
 export class CreateAccountUseCase implements ICreateAccountUseCase {
-
   constructor(private readonly repository: ICreateAccountRepository) {}
 
-  async create(account: AccountDTO)
-  : Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
+  async create(
+    account: AccountDTO
+  ): Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
+    const newAccount = new Account(account);
+    
     try {
-      const isExistWithEmail = 
-      await this.repository.existsWithEmail(account);
+      const isEmailAlreadyUsed = 
+      await this.repository.findWithEmail(newAccount.email);
 
-      if (isExistWithEmail) {
+      if (isEmailAlreadyUsed) {
         return {
           statusCode: HttpStatusCode.Conflict,
           body: { error: "Já existe uma conta criada com o email informado!" },
         };
       }
 
-      await this.repository.create(account);
+      await this.repository.create(newAccount);
       return {
         statusCode: HttpStatusCode.Created,
-        body: {message: "Conta criada com sucesso!"},
+        body: { message: "Conta criada com sucesso!" },
       };
     } catch (error) {
       return {

@@ -1,4 +1,4 @@
-import { AccountDTO } from "../dto";
+import { AccountDTO } from "../dtos";
 
 export interface ICreateAccountRepository {
   findWithEmail(email: string): Promise<AccountDTO | null>;

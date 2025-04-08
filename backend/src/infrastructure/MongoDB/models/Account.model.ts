@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import { accountSchema } from "@infrastructure/MongoDB";
-import { AccountDTO } from "@domains/account";
 
-export const AccountModel = mongoose.model<AccountDTO>(
-  "Accounts",
-  accountSchema
-);
+import { AccountDTO } from "@domains/account";
+import { accountSchema } from "@infrastructure/MongoDB/schemas";
+
+export const AccountModel = mongoose.model<AccountDTO>("Account", accountSchema);

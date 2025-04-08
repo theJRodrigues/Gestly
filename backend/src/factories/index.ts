@@ -1,1 +1,0 @@
-export * from '../domains/account/factories/CreateAccount.factory';

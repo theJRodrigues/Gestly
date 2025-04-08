@@ -1,29 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+import {model} from "mongoose";
+import { customerSchema } from "../schemas";
 
-interface IAddress {
-  cep: string;
-  street: string;
-  number: string;
-  complement?: string;
-  refPoint?: string;
-}
+export const CustomerModel = model("Customer", customerSchema);
 
-interface IContact {
-  DDD: string;
-  number: string;
-}
-
-export interface ICustomer {
-  id: string,
-  firstname: string;
-  lastname: string;
-  email: string;
-  contact: IContact;
-  cpf: string;
-  birthDate: Date;
-  address: IAddress;
-}
-
-const Customer = mongoose.model("Customer", customerSchema);
-
-export default Customer;

@@ -1,1 +1,1 @@
-export * from "./GetEnvVaribles.service";
+export * from "./ValidateEnvVariables.util";

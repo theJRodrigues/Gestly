@@ -1,4 +1,4 @@
-import { GetEnvVariables } from "@shared/services";
+import { GetEnvVariables } from "@shared/utils";
 import mongoose from "mongoose";
 
 export class MongoDB {
@@ -12,7 +12,9 @@ export class MongoDB {
       console.log("Conexão com o banco de dados feita com sucesso");
       return;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao tentar se comunicar com o banco de dados. Entre em contato com o administrador.");
+      throw new Error(
+        "Ocorreu um erro ao tentar se comunicar com o banco de dados. Entre em contato com o administrador."
+      );
     }
   }
 }

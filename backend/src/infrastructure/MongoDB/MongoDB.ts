@@ -1,9 +1,9 @@
-import { GetEnvVariables } from "@shared/utils";
+import { envs } from "@shared/constants";
 import mongoose from "mongoose";
 
 export class MongoDB {
   static async connect(): Promise<void> {
-    const { dbUser, dbPassword } = GetEnvVariables.variables();
+    const { dbUser, dbPassword } = envs;
     try {
       await mongoose.connect(
         `mongodb+srv://${dbUser}:${dbPassword}@gestly.qozhz.mongodb.net/Gestly?retryWrites=true&w=majority&appName=Gestly`

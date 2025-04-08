@@ -2,11 +2,13 @@ import { ICreateCustomerRepository, CustomerDTO } from "@domains/customer";
 import {CustomerModel} from "@infrastructure/MongoDB";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
-  findByCPF(cpf: string): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async findByCPF(cpf: string): Promise<CustomerDTO | null> {
+    const isFound = await CustomerModel.findOne({ cpf });
+    return isFound
   }
-  findByEmail(email: string): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async findByEmail(email: string): Promise<CustomerDTO | null> {
+    const isFound = await CustomerModel.findOne({ email });
+    return isFound
   }
 
   async create(customer: CustomerDTO): Promise<CustomerDTO> {

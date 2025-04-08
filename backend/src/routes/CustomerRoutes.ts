@@ -3,8 +3,9 @@ import {
   CreateCustomerMiddleware,
   ValidateErrorsMiddlewares,
 } from "@shared/middlewares";
-import { CreateCustomerFactory } from "factories/customer/CreateCustomer.factory";
-import { CreateCustomerAdapter } from "adapters/express/customer/CreateCustomer.adapter";
+import { CreateCustomerFactory } from "@domains/customer";
+import { CreateCustomerController } from "@adapters/controllers";
+
 
 const customerRoutes = express.Router();
 
@@ -25,10 +26,10 @@ customerRoutes.post(
   CreateCustomerMiddleware.validateFields(),
   ValidateErrorsMiddlewares.handle,
   (req: Request, res: Response) => {
-    const controller = CreateCustomerFactory.make();
-    const adapter = new CreateCustomerAdapter(controller);
+    const useCase = CreateCustomerFactory.make();
+    const controller = new CreateCustomerController(useCase);
 
-    adapter.handle(req, res);
+    controller.handle(req, res);
   }
 );
 

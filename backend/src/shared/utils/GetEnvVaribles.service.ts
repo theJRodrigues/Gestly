@@ -1,25 +1,17 @@
+import { envs } from "@shared/constants"
 import dotenv from "dotenv"
 dotenv.config()
 
-interface IEnvVariables{
-    dbUser: string,
-    dbPassword: string, 
-    serverPort: number,
-    jwtSecret: string,
-}
 
-export class GetEnvVariables{
-    static  variables(): IEnvVariables{
-        const serverPort = Number(process.env.PORT) || 3000;
-        const dbUser = process.env.DB_USER;
-        const dbPassword = process.env.DB_PASSWORD;
-        const jwtSecret = process.env.JWT_SECRET
 
-        if(!serverPort || !dbUser || !dbPassword || !jwtSecret){
-            throw new Error("Verificar as variáveis de ambiente")
+export class ValidateEnvVariables{
+    static async execute(): Promise<void>{
+        for(const [key, value] of Object.entries(envs)){
+            if(!value){
+                throw new Error(`A variável de ambiente ${key} não está definida`)
+            }
         }
-        
-        return {serverPort, dbUser, dbPassword, jwtSecret}
+        return
     }
 
 }

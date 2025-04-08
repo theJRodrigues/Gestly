@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { statusCode } from "protocols/protocols";
+import {  HttpStatusCode } from "@shared/protocols";
 
 export class ValidateErrorsMiddlewares {
   static handle(req: Request, res: Response, next: NextFunction): void {
@@ -8,7 +8,7 @@ export class ValidateErrorsMiddlewares {
 
     if (!errors.isEmpty()) {
       res
-        .status(statusCode.UnprocessableEntity)
+        .status(HttpStatusCode.UnprocessableEntity)
         .json({ errors: errors.array() });
       return;
     }

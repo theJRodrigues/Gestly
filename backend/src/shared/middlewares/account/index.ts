@@ -1,1 +1,1 @@
-export * from './CreateAccout.middleware'
+export * from './CreateAccount.middleware'

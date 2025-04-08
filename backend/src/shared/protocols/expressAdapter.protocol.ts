@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
 
-export interface IExpressAdapter {
+export interface IExpressController {
   handle(req: Request, res: Response): Promise<void>;
 }

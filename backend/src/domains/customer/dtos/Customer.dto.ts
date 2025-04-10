@@ -12,6 +12,7 @@ export interface IContact {
   }
 export interface CustomerDTO{
         id?: string;
+        accountId: string;
         firstname: string;
         lastname: string;
         email: string;

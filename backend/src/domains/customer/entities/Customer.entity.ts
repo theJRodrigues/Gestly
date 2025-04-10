@@ -2,6 +2,7 @@ import { CustomerDTO, IAddress, IContact } from "@domains/customer";
 
 export class Customer {
     readonly id?: string
+    readonly accountId: string
     readonly firstname: string
     readonly lastname: string
     readonly email: string
@@ -12,6 +13,7 @@ export class Customer {
 
     constructor(customer: CustomerDTO) {
         this.id = customer.id;
+        this.accountId = customer.accountId;
         this.firstname = customer.firstname;
         this.lastname = customer.lastname;
         this.email = customer.email;

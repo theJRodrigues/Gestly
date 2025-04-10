@@ -7,6 +7,7 @@ import {
   CustomerDTO,
   IGetAllCustomersUseCase,
   IGetAllCustomersRepository,
+
 } from "@domains/customer";
 
 export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {

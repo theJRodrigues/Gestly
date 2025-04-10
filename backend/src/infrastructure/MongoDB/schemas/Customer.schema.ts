@@ -1,10 +1,11 @@
 import { CustomerDTO } from "@domains/customer";
-import { Schema } from "mongoose";
+import { isValidObjectId, Schema } from "mongoose";
 
 const emailRegex =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 export const customerSchema = new Schema<CustomerDTO>(
   {
+    accountId: { type: String, required: true, validate:{ validator: isValidObjectId} },
     firstname: { type: String, required: true, minlength: 1, maxlength: 30 },
     lastname: { type: String, required: true, minlength: 1, maxlength: 30 },
     email: { type: String, required: true, match: emailRegex, unique: true },
@@ -30,7 +31,7 @@ export const customerSchema = new Schema<CustomerDTO>(
   },
   {
     timestamps: true,
-    collection: "Costumers",
+    collection: "Customers",
     toJSON: {
       transform(_doc, ret) {
         ret.id = ret._id;

@@ -16,37 +16,43 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase{
 
   async create(customer: CustomerDTO)
   :Promise<IHttpResponse<CustomerDTO | IHttpErrorResponse>> {
-    const customerEntity = new Customer(customer);
+    const newCustomer = new Customer(customer);
+
     try {
-      const isEmailAlreadyUsed = await this.repository.findByEmail(customerEntity.email);
-      if (isEmailAlreadyUsed) {
+      const emailAlreadyUsedOnTheCustomer = 
+      await this.repository.findByEmail(newCustomer.email);
+
+      if (emailAlreadyUsedOnTheCustomer) {
         return {
           statusCode: HttpStatusCode.Conflict,
           body: {
             error: "O email informado já está sendo utilizado no cadastro do cliente " 
-            + isEmailAlreadyUsed.firstname 
+            + emailAlreadyUsedOnTheCustomer.firstname 
             + " " 
-            + isEmailAlreadyUsed.lastname},
+            + emailAlreadyUsedOnTheCustomer.lastname},
         };
       }
-      const isCPFAlreadyUsed = await this.repository.findByCPF(customerEntity.cpf);
-      if (isCPFAlreadyUsed) {
+
+      const CPFAlreadyUsedOnTheCustomer = 
+      await this.repository.findByCPF(newCustomer.cpf);
+
+      if (CPFAlreadyUsedOnTheCustomer) {
         return {
           statusCode: HttpStatusCode.Conflict,
           body: {
             error: "O CPF informado já está sendo utilizado no cadastro do cliente " 
-            + isCPFAlreadyUsed.firstname 
+            + CPFAlreadyUsedOnTheCustomer.firstname 
             + " " 
-            + isCPFAlreadyUsed.lastname},
+            + CPFAlreadyUsedOnTheCustomer.lastname},
         };
       }
 
-      const newCustomer = 
-      await this.repository.create(customerEntity);
+      const createdCustomer = 
+      await this.repository.create(newCustomer);
       
       return {
         statusCode: HttpStatusCode.Created,
-        body: newCustomer,
+        body: createdCustomer,
       };
     } catch (error) {
       return {

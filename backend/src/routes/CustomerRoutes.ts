@@ -3,8 +3,8 @@ import {
   CreateCustomerMiddleware,
   ValidateErrorsMiddlewares,
 } from "@shared/middlewares";
-import { CreateCustomerFactory } from "@domains/customer";
-import { CreateCustomerController } from "@adapters/controllers";
+import { CreateCustomerFactory, GetAllCustomersFactory } from "@domains/customer";
+import { CreateCustomerController,GetAllCustomersController } from "@adapters/controllers";
 
 
 const customerRoutes = express.Router();
@@ -15,11 +15,12 @@ const customerRoutes = express.Router();
 //   controller.getAll(res);
 // });
 
-// customerRoutes.get("/:id", (req, res) => {
-//   const repository = new GetCustomerByIdRepository();
-//   const controller = new GetCustomerByIdController(repository);
-//   controller.get(req, res);
-// });
+customerRoutes.get("/:accountId", (req, res) => {
+  const useCase = GetAllCustomersFactory.make();
+  const controller = new GetAllCustomersController(useCase);
+
+  controller.handle(req, res);
+});
 
 customerRoutes.post(
   "/create",

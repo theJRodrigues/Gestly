@@ -1,1 +1,2 @@
-export * from './CreateCustomer.factory'
+export * from "./CreateCustomer.factory";
+export * from "./GetAllCustomers.factory";

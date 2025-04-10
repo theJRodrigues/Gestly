@@ -3,7 +3,7 @@ import cors from "cors";
 import Routes from "./routes/Router";
 import { MongoDB } from "@infrastructure/MongoDB";
 import { envs } from "@shared/constants";
-import { ValidateEnvVariables } from "@shared/utils";
+import { ValidateEnvVariables } from "@shared/services";
 const app = express();
 class main {
   static async execute() {

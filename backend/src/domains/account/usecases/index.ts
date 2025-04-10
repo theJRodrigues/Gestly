@@ -1,2 +1,2 @@
 export * from './CreateAccount.usecase'
-export * from './createAccountUseCase.protocol'
+export * from './protocols/createAccountUseCase.protocol'

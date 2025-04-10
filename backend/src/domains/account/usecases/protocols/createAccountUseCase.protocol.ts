@@ -3,7 +3,7 @@ import {
   IHttpMessageResponse,
   IHttpResponse,
 } from "@shared/protocols";
-import { AccountDTO } from "../dtos";
+import { AccountDTO } from "@domains/account";
 
 export interface ICreateAccountUseCase {
   create(

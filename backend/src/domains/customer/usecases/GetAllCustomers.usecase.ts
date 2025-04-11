@@ -6,9 +6,9 @@ import {
 import {
   CustomerDTO,
   IGetAllCustomersUseCase,
-  IGetAllCustomersRepository,
-
+  IGetAllCustomersRepository
 } from "@domains/customer";
+import { ValidateAccountIdExistService } from "@shared/services";
 
 export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
   constructor(private readonly repository: IGetAllCustomersRepository) {}
@@ -16,13 +16,13 @@ export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
   async get(accountId: string)
   : Promise<IHttpResponse<CustomerDTO[] | IHttpErrorResponse>> {
     try {
-      const isExistAccount = await this.repository.findById(accountId);
+      const isExistAccountId = await ValidateAccountIdExistService.validate(accountId);
 
-      if (!isExistAccount) {
+      if (!isExistAccountId) {
         return {
           statusCode: HttpStatusCode.NotFound,
           body: {
-            error: "Conta não encontrada! Faça o login novamente ou entre em contato com o administrador!",
+            error: "Conta não encontrada! Faça o login novamente!",
           },
         };
       }

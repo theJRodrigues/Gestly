@@ -1,5 +1,5 @@
 import { CustomerDTO, IGetAllCustomersRepository } from "@domains/customer";
-import { AccountModel, CustomerModel } from "@infrastructure/MongoDB";
+import { CustomerModel } from "@infrastructure/MongoDB";
 
 export class GetAllCustomersRepository implements IGetAllCustomersRepository {
   

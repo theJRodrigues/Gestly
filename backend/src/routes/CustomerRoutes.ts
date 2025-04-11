@@ -15,7 +15,7 @@ const customerRoutes = express.Router();
 //   controller.getAll(res);
 // });
 
-customerRoutes.get("/:accountId", (req, res) => {
+customerRoutes.get("/", (req, res) => {
   const useCase = GetAllCustomersFactory.make();
   const controller = new GetAllCustomersController(useCase);
 

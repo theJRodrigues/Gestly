@@ -1,9 +1,11 @@
 import express from "express";
+import cookieParser from "cookie-parser"
 import cors from "cors";
 import Routes from "./routes/Router";
 import { MongoDB } from "@infrastructure/MongoDB";
 import { envs } from "@shared/constants";
 import { ValidateEnvVariables } from "@shared/services";
+
 const app = express();
 class main {
   static async execute() {
@@ -13,6 +15,7 @@ class main {
     const { serverPort, origin } = envs;
     app.use(cors({ credentials: true, origin: origin }));
     app.use(express.json());
+    app.use(cookieParser())
     app.use(express.urlencoded({ extended: false }));
     app.use(Routes);
 

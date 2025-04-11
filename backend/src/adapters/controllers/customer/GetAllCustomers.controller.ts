@@ -6,7 +6,7 @@ export class GetAllCustomersController implements IExpressController{
     constructor(private readonly useCase: IGetAllCustomersUseCase) {}
     
     async handle(req: Request, res: Response ): Promise<void> {
-        const {accountId} = req.params
+        const accountId = req.cookies.accountId
         const {statusCode, body} = await this.useCase.get(accountId);
          res.status(statusCode).json(body);
          return

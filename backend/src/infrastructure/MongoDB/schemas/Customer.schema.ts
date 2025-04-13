@@ -36,7 +36,7 @@ export const customerSchema = new Schema<CustomerDTO>(
   {
     timestamps: true,
     collection: "Customers",
-    toJSON: {
+    toObject: {
       transform(_doc, ret) {
         ret.id = ret._id;
         delete ret._id;

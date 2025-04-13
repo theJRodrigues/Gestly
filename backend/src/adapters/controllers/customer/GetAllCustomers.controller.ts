@@ -1,4 +1,4 @@
-import { CustomerDTO, IGetAllCustomersUseCase } from "@domains/customer";
+import { IGetAllCustomersUseCase } from "@domains/customer";
 import { IExpressController } from "@shared/protocols";
 import { Request, Response } from "express";
 

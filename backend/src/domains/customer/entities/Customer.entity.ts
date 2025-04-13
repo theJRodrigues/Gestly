@@ -22,4 +22,8 @@ export class Customer {
     this.birthDate = customer.birthDate;
     this.address = customer.address;
   }
+
+  getFullName(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
 }

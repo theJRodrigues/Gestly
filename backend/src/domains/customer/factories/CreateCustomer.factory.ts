@@ -1,10 +1,11 @@
 import { CreateCustomerUseCase } from "@domains/customer";
-import { CreateCustomerRepository } from "@infrastructure/MongoDB";
+import { CreateCustomerRepository, ValidateExistAccountService } from "@infrastructure/MongoDB";
 
 export class CreateCustomerFactory{
     static make(){
         const repository = new CreateCustomerRepository();
-        const useCase = new CreateCustomerUseCase(repository);
+        const validateService = new ValidateExistAccountService();
+        const useCase = new CreateCustomerUseCase(repository, validateService);
 
         return useCase;
     }

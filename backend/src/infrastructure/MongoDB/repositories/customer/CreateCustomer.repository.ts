@@ -1,18 +1,21 @@
-import { ICreateCustomerRepository, CustomerDTO } from "@domains/customer";
+import { ICreateCustomerRepository, Customer } from "@domains/customer";
 import {CustomerModel} from "@infrastructure/MongoDB";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
-  async findByCPF(cpf: string): Promise<CustomerDTO | null> {
+  async findByCPF(cpf: string): Promise<Customer | null> {
     const isFound = await CustomerModel.findOne({ cpf });
-    return isFound
+    const customer = isFound ? new Customer(isFound.toObject()) : null;
+    return customer
   }
-  async findByEmail(email: string): Promise<CustomerDTO | null> {
+  async findByEmail(email: string): Promise<Customer | null> {
     const isFound = await CustomerModel.findOne({ email });
-    return isFound
+    const customer = isFound ? new Customer(isFound.toObject()) : null;
+    return customer
   }
 
-  async create(customer: CustomerDTO): Promise<CustomerDTO> {
+  async create(customer: Customer): Promise<Customer> {
     const createCustomer = await CustomerModel.create(customer);
-    return createCustomer;
+    const newCustomer = new Customer(createCustomer.toObject());
+    return newCustomer;
   }
 }

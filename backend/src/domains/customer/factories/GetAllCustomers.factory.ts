@@ -1,11 +1,12 @@
-import { GetAllCustomersRepository, ValidateExistAccountService } from "@infrastructure/MongoDB";
+import { GetAllCustomersRepository } from "@infrastructure/MongoDB";
 import { GetAllCustomersUseCase } from "@domains/customer";
+import { ValidateExistAccountServiceFactory } from "@domains/account";
 
 export class GetAllCustomersFactory {
   static make() {
     const repository = new GetAllCustomersRepository();
-    const validateAccount = new ValidateExistAccountService()
-    const useCase = new GetAllCustomersUseCase(repository, validateAccount);
+    const service = new ValidateExistAccountServiceFactory()
+    const useCase = new GetAllCustomersUseCase(repository, service);
     return useCase;  
   }
 }

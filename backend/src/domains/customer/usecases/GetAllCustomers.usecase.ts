@@ -8,15 +8,17 @@ import {
   IGetAllCustomersUseCase,
   IGetAllCustomersRepository
 } from "@domains/customer";
-import { ValidateAccountIdExistService } from "@shared/services";
+import { IValidateExistAccountService } from "@infrastructure/MongoDB";
 
 export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
-  constructor(private readonly repository: IGetAllCustomersRepository) {}
+  constructor(
+    private readonly repository: IGetAllCustomersRepository,
+    private readonly validateAccontService: IValidateExistAccountService) {}
 
   async get(accountId: string)
   : Promise<IHttpResponse<CustomerDTO[] | IHttpErrorResponse>> {
     try {
-      const isExistAccountId = await ValidateAccountIdExistService.validate(accountId);
+      const isExistAccountId = await this.validateAccontService.validate(accountId);
 
       if (!isExistAccountId) {
         return {

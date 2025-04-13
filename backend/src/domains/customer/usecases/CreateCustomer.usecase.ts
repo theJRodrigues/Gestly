@@ -10,12 +10,12 @@ import {
   ICreateCustomerRepository,
   Customer,
 } from "@domains/customer";
-import { IValidateExistAccountService } from "@infrastructure/MongoDB";
+import { IValidateExistAccountService } from "@domains/account";
 
 export class CreateCustomerUseCase implements ICreateCustomerUseCase {
   constructor(
     private readonly repository: ICreateCustomerRepository,
-    private readonly validateExistAccountService: IValidateExistAccountService
+    private readonly service: IValidateExistAccountService
   ) {}
   async create(customerDTO: CustomerDTO)
   : Promise<IHttpResponse<Customer | IHttpErrorResponse>> {
@@ -57,9 +57,7 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase {
   }
 
   private async validateExistAccount(accountIdRef: string): Promise<IHttpResponse<IHttpErrorResponse> | null> {
-    const isExistAccount = 
-      await this.validateExistAccountService
-      .validate(accountIdRef);
+    const isExistAccount = await this.service.validate(accountIdRef);
       if (!isExistAccount) {
         return {
           statusCode: HttpStatusCode.NotFound,

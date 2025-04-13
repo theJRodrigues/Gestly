@@ -8,7 +8,7 @@ import {
   IGetAllCustomersUseCase,
   IGetAllCustomersRepository
 } from "@domains/customer";
-import { IValidateExistAccountService } from "@infrastructure/MongoDB";
+import { IValidateExistAccountService } from "@domains/account";
 
 export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
   constructor(

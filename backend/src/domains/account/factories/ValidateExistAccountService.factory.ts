@@ -1,5 +1,5 @@
 import { ValidateExistAccountRepository } from "@infrastructure/MongoDB";
-import {  IValidateExistAccountService, ValidateExistAccountService } from "@domains/account"
+import {  ValidateExistAccountService } from "@shared/services"
 
 export class ValidateExistAccountServiceFactory {
   static make(){

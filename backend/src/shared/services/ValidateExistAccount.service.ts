@@ -3,9 +3,7 @@ import {
   IValidateExistAccountService,
 } from "@domains/account";
 
-export class ValidateExistAccountService
-  implements IValidateExistAccountService
-{
+export class ValidateExistAccountService implements IValidateExistAccountService {
   constructor(
     private readonly repository: IValidateExistAccountServiceRepository
   ) {}

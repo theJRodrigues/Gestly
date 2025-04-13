@@ -1,2 +1,1 @@
-export * from './ValidateExistAccount.service'
-export * from './protocols'
+export * from './validateExistAccountService.protocol'

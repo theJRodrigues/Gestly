@@ -1,9 +1,9 @@
-import { CustomerDTO } from "@domains/customer/dtos";
+import { Customer, CustomerDTO } from "@domains/customer";
 import { IHttpErrorResponse, IHttpResponse } from "@shared/protocols";
 
 export interface ICreateCustomerUseCase {
-  create(customer: CustomerDTO)
-  : Promise<IHttpResponse<CustomerDTO | IHttpErrorResponse>>;
+  create(customerDTO: CustomerDTO)
+  : Promise<IHttpResponse<Customer | IHttpErrorResponse>>;
 }
 
 

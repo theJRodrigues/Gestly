@@ -1,2 +1,2 @@
 export * from "./createAccountRepository.protocol";
-export * from './validateExistAccountRepository.protocol'
+export * from './validateExistAccountServiceRepository.protocol'

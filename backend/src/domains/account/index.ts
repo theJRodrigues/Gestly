@@ -3,3 +3,4 @@ export * from "./repositories";
 export * from "./usecases";
 export * from "./dtos";
 export * from "./entities";
+export * from "./services";

@@ -23,7 +23,7 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase {
     try {
       const customer = new Customer(customerDTO);
 
-      const isNotExistAccount = await this.validateExistAccount(customer.accountIdRef)
+      const isNotExistAccount = await this.validateExistAccount(customer.accountIdRef!)
       if (isNotExistAccount) {
         return isNotExistAccount;
       }

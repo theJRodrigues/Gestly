@@ -41,6 +41,7 @@ export const customerSchema = new Schema<CustomerDTO>(
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
+        delete ret.accountIdRef;
       },
     },
   }

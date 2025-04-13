@@ -2,7 +2,7 @@ import { CustomerDTO, IAddress, IContact } from "@domains/customer";
 
 export class Customer {
   readonly id?: string;
-  readonly accountIdRef: string;
+  readonly accountIdRef?: string;
   readonly firstname: string;
   readonly lastname: string;
   readonly email: string;

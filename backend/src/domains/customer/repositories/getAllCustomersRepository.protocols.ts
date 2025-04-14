@@ -1,5 +1,5 @@
-import { CustomerDTO } from "@domains/customer";
+import { Customer } from "@domains/customer";
 
 export interface IGetAllCustomersRepository{
-    get(accountId: string): Promise<CustomerDTO[]>
+    get(accountId: string): Promise<Customer[]>
 }

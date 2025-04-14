@@ -4,30 +4,27 @@ import {
   HttpStatusCode,
 } from "@shared/protocols";
 import {
-  CustomerDTO,
   IGetAllCustomersUseCase,
-  IGetAllCustomersRepository
+  IGetAllCustomersRepository,
+  Customer
 } from "@domains/customer";
 import { IValidateExistAccountService } from "@domains/account";
 
 export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
   constructor(
     private readonly repository: IGetAllCustomersRepository,
-    private readonly validateAccontService: IValidateExistAccountService) {}
-
+    private readonly service: IValidateExistAccountService
+  ) {}
+  
   async get(accountId: string)
-  : Promise<IHttpResponse<CustomerDTO[] | IHttpErrorResponse>> {
+  : Promise<IHttpResponse<Customer[] | IHttpErrorResponse>> {
     try {
-      const isExistAccountId = await this.validateAccontService.validate(accountId);
-
-      if (!isExistAccountId) {
-        return {
-          statusCode: HttpStatusCode.NotFound,
-          body: {
-            error: "Conta não encontrada! Faça o login novamente!",
-          },
-        };
+      const isNotExistAccount = 
+      await this.validateExistAccount(accountId);
+      if (isNotExistAccount) {
+        return isNotExistAccount
       }
+      
 
       const customers = await this.repository.get(accountId);
       return {
@@ -36,10 +33,24 @@ export class GetAllCustomersUseCase implements IGetAllCustomersUseCase {
       };
       
     } catch (error) {
+      console.log(error)
       return {
         statusCode: HttpStatusCode.InternalServerError,
         body: {
           error: "Ocorreu um erro ao procurar os clientes no banco de dados!",
+        },
+      };
+    }
+  }
+
+  private async validateExistAccount(accountId: string) {
+    const isExistAccountId = await this.service.validate(accountId);
+
+    if (!isExistAccountId) {
+      return {
+        statusCode: HttpStatusCode.NotFound,
+        body: {
+          error: "Conta não encontrada! Faça o login novamente!",
         },
       };
     }

@@ -15,28 +15,23 @@ import {
 export class CreateAccountUseCase implements ICreateAccountUseCase {
   constructor(private readonly repository: ICreateAccountRepository) {}
 
-  async create(
-    account: AccountDTO
-  ): Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
-    const newAccount = new Account(account);
-    
+  async create(accountDTO: AccountDTO )
+  :Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
     try {
-      const isEmailAlreadyUsed = 
-      await this.repository.findWithEmail(newAccount.email);
+      const account = new Account(accountDTO);
+      await account.hashPassword();
 
-      if (isEmailAlreadyUsed) {
-        return {
-          statusCode: HttpStatusCode.Conflict,
-          body: { error: "Já existe uma conta criada com o email informado!" },
-        };
+      const emailAlreadyUsed = await this.validateUsedEmail(account.email);
+      if(emailAlreadyUsed) {
+        return emailAlreadyUsed
       }
-
-      await this.repository.create(newAccount);
+      await this.repository.create(account);
       return {
         statusCode: HttpStatusCode.Created,
         body: { message: "Conta criada com sucesso!" },
       };
     } catch (error) {
+      console.log(error)
       return {
         statusCode: HttpStatusCode.InternalServerError,
         body: {
@@ -45,5 +40,19 @@ export class CreateAccountUseCase implements ICreateAccountUseCase {
         },
       };
     }
+  }
+
+  private async validateUsedEmail(email: string): Promise<IHttpResponse<IHttpMessageResponse> | null> {
+
+    const isEmailAlreadyUsed = 
+    await this.repository.findWithEmail(email);
+
+    if (isEmailAlreadyUsed) {
+      return {
+        statusCode: HttpStatusCode.Conflict,
+        body: { error: "Já existe uma conta criada com o email informado!" },
+      };
+    }
+    return null
   }
 }

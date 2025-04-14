@@ -7,6 +7,6 @@ import { AccountDTO } from "@domains/account";
 
 export interface ICreateAccountUseCase {
   create(
-    account: AccountDTO
+    accountDTO: AccountDTO
   ): Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>>;
 }

@@ -1,16 +1,16 @@
-import { AccountDTO, ICreateAccountRepository } from "@domains/account";
+import { Account, ICreateAccountRepository } from "@domains/account";
 import { AccountModel } from "@infrastructure/MongoDB";
 
 export class CreateAccountRepository implements ICreateAccountRepository {
-  async findWithEmail(email: string): Promise<AccountDTO | null> {
-    const isFound = 
+  async findWithEmail(email: string): Promise<boolean> {
+    const isFoundAccount = 
     await AccountModel.findOne({email: email});
-    
-    return isFound;
+    return !!isFoundAccount;
   }
 
-  async create(account: AccountDTO): Promise<AccountDTO> {
-    const newAccount = await AccountModel.create(account);
-    return newAccount;
+  async create(account: Account): Promise<void> {
+    const objAccount = account.toObject();
+    await AccountModel.create(objAccount);
+    return 
   }
 }

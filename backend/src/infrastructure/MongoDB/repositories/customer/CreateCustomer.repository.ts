@@ -8,7 +8,7 @@ export class CreateCustomerRepository implements ICreateCustomerRepository {
     return customer
   }
   async findByEmail(email: string): Promise<Customer | null> {
-    const isFound = await CustomerModel.findOne({ email });
+    const isFound = await CustomerModel.findOne({email: {$eq: email}});
     const customer = isFound ? new Customer(isFound.toObject()) : null;
     return customer
   }

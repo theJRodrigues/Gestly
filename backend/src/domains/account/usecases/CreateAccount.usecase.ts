@@ -19,12 +19,13 @@ export class CreateAccountUseCase implements ICreateAccountUseCase {
   :Promise<IHttpResponse<IHttpMessageResponse | IHttpErrorResponse>> {
     try {
       const account = new Account(accountDTO);
-      await account.hashPassword();
-
+      
       const emailAlreadyUsed = await this.validateUsedEmail(account.email);
       if(emailAlreadyUsed) {
         return emailAlreadyUsed
       }
+      
+      await account.hashPassword();
       await this.repository.create(account);
       return {
         statusCode: HttpStatusCode.Created,

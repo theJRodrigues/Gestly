@@ -4,7 +4,7 @@ import { AccountModel } from "@infrastructure/MongoDB";
 export class CreateAccountRepository implements ICreateAccountRepository {
   async findWithEmail(email: string): Promise<boolean> {
     const isFoundAccount = 
-    await AccountModel.findOne({email: email});
+    await AccountModel.findOne({email: {$eq:email}});
     return !!isFoundAccount;
   }
 

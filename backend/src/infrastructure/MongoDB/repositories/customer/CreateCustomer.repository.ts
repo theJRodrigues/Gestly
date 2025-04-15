@@ -1,4 +1,4 @@
-import { ICreateCustomerRepository, Customer } from "@domains/customer";
+import { ICreateCustomerRepository, Customer, CustomerDTO } from "@domains/customer";
 import {CustomerModel} from "@infrastructure/MongoDB";
 
 export class CreateCustomerRepository implements ICreateCustomerRepository {
@@ -13,7 +13,7 @@ export class CreateCustomerRepository implements ICreateCustomerRepository {
     return customer
   }
 
-  async create(customer: Customer): Promise<Customer> {
+  async create(customer: CustomerDTO): Promise<Customer> {
     const createCustomer = await CustomerModel.create(customer);
     const newCustomer = new Customer(createCustomer.toObject());
     return newCustomer;

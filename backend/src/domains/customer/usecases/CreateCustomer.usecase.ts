@@ -18,7 +18,7 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase {
     private readonly service: IValidateExistAccountService
   ) {}
   async create(customerDTO: CustomerDTO)
-  : Promise<IHttpResponse<Customer | IHttpErrorResponse>> {
+  : Promise<IHttpResponse<CustomerDTO | IHttpErrorResponse>> {
     
     try {
       const customer = new Customer(customerDTO);
@@ -39,10 +39,10 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase {
       }
       
       const newCustomer = 
-      await this.repository.create(customer);
+      await this.repository.create(customer.toObject());
       return {
         statusCode: HttpStatusCode.Created,
-        body: newCustomer,
+        body: newCustomer.toObject(),
       };
     } 
     catch (error) {
@@ -73,13 +73,11 @@ export class CreateCustomerUseCase implements ICreateCustomerUseCase {
     const customerAlreadUsesEmail = 
     await this.repository.findByEmail(email);
     if (customerAlreadUsesEmail){
-      const fullName =
-        customerAlreadUsesEmail.firstname + customerAlreadUsesEmail.lastname;
       return {
         statusCode: HttpStatusCode.Conflict,
         body: {
           error:
-            "O email informado já está sendo utilizado no cadastro do cliente " + fullName
+            "O email informado já está sendo utilizado no cadastro do cliente " + customerAlreadUsesEmail.getFullName()
         },
       };
     }

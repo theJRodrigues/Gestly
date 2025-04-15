@@ -22,6 +22,7 @@ accountsRoutes.post(
   CreateAccountMiddleware.validateFields(),
   ValidateErrorsMiddlewares.handle,
   (req: Request, res: Response) => {
+    console.log(req.body)
     const useCase = CreateAccountFactory.make();
     const controller = new CreateAccountController(useCase);
     return controller.handle(req, res);

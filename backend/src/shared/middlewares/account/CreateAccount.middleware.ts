@@ -6,6 +6,8 @@ export class CreateAccountMiddleware {
       .exists()
       .withMessage("O primeiro nome é obrigatório")
       .bail()
+      .trim()
+      .escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O primeiro nome não pode ser vazio");
   }
@@ -15,6 +17,8 @@ export class CreateAccountMiddleware {
       .exists()
       .withMessage("O sobrenome é obrigatório")
       .bail()
+      .trim()
+      .escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O sobrenome não pode ser vazio");
   }

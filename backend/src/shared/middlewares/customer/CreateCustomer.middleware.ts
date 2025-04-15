@@ -1,11 +1,13 @@
 import { body, ValidationChain } from "express-validator";
 
 export class CreateCustomerMiddleware {
+  //TODO implementar escape e trim nos campos de texto
   private static validateFirstName(): ValidationChain {
     return body("firstname")
       .exists()
       .withMessage("O primeiro nome é obrigatório.")
       .bail()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O primeiro nome não pode estar vazio.")
       .bail();
@@ -15,6 +17,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O sobrenome é obrigatório.")
       .bail()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O sobrenome não pode estar vazio.")
       .bail();
@@ -33,14 +36,15 @@ export class CreateCustomerMiddleware {
     return body("contact")
       .exists()
       .withMessage("O contato é obrigatório.")
-      .bail();
+      .bail()
+      .trim().escape();
   }
   private static validateContactDDD(): ValidationChain {
     return body("contact.DDD")
       .exists()
       .withMessage("O DDD é obrigatório.")
       .bail()
-      .trim()
+      .trim().escape()
       .isLength({ min: 2, max: 2 })
       .withMessage("DDD informado está incorreto.")
       .bail()
@@ -61,7 +65,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O número do contato é obrigatório.")
       .bail()
-      .trim()
+      .trim().escape()
       .isLength({ min: 9, max: 9 })
       .withMessage("O número de contato informado deve conter 9 números.")
       .bail();
@@ -72,7 +76,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O CPF é obrigatório.")
       .bail()
-      .trim()
+      .trim().escape()
       .isLength({ min: 11, max: 11 })
       .withMessage("O CPF deve conter 11 números.")
       .bail();
@@ -82,6 +86,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("A data de nascimento é obrigatória")
       .bail()
+      .trim().escape()
       .isDate()
       .withMessage("A data de nascimento está no formato incorreto.")
       .bail()
@@ -103,7 +108,8 @@ export class CreateCustomerMiddleware {
     return body("address")
       .exists()
       .withMessage("O endereço é obrigatório")
-      .bail();
+      .bail()
+      .trim().escape();
   }
 
   private static validateAdrressCep(): ValidationChain {
@@ -111,7 +117,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O CEP é obrigatório.")
       .bail()
-      .trim()
+      .trim().escape()
       .isLength({ min: 8, max: 8 })
       .withMessage("O CEP deve conter 8 números.")
       .bail();
@@ -122,6 +128,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O nome da Rua é obrigatório.")
       .bail()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("A campo Rua não pode estar vazio")
       .bail();
@@ -131,6 +138,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O número do endereço é obrigatório.")
       .bail()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O campo número do endereço não pode estar vazio.")
       .bail();
@@ -138,6 +146,7 @@ export class CreateCustomerMiddleware {
   private static validateAddressComplement(): ValidationChain {
     return body("address.complement")
       .optional()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O campo complemento não pode estar vazio")
       .bail();
@@ -145,6 +154,7 @@ export class CreateCustomerMiddleware {
   private static validateAddressRefPoint(): ValidationChain {
     return body("address.refPoint")
       .optional()
+      .trim().escape()
       .notEmpty({ ignore_whitespace: true })
       .withMessage("O ponto de referência não pode estar vazio.");
   }

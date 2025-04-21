@@ -1,7 +1,6 @@
 import { body, ValidationChain } from "express-validator";
 
 export class CreateCustomerMiddleware {
-  //TODO implementar escape e trim nos campos de texto
   private static validateFirstName(): ValidationChain {
     return body("firstname")
       .exists()
@@ -27,6 +26,7 @@ export class CreateCustomerMiddleware {
       .exists()
       .withMessage("O email é obrigatório.")
       .bail()
+      .trim()
       .isEmail()
       .withMessage("O email deve ser válido.")
       .bail();
